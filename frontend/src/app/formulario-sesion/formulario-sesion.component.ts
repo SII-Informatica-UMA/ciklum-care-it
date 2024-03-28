@@ -3,11 +3,11 @@ import  {Contacto} from '../contacto';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-formulario-contacto',
-  templateUrl: './formulario-contacto.component.html',
-  styleUrls: ['./formulario-contacto.component.css']
+  selector: 'app-formulario-sesion',
+  templateUrl: './formulario-sesion.component.html',
+  styleUrls: ['./formulario-sesion.component.css']
 })
-export class FormularioContactoComponent {
+export class FormularioSesionComponent {
   accion?: "Añadir" | "Editar";
   contacto: Contacto = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
 

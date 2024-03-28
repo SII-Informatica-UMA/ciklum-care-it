@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Contacto } from './contacto';
 import {ContactosService } from './contactos.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioContactoComponent} from './formulario-contacto/formulario-contacto.component'
+import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.component'
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   aniadirContacto(): void {
-    let ref = this.modalService.open(FormularioContactoComponent);
+    let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.contacto = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
     ref.result.then((contacto: Contacto) => {
