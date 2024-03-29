@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+      <label for="pulsaciones">Pulsaciones del corazón:</label>
+      <input class="form-control" id="nombre" [(ngModel)]="contacto.nombre" placeholder="pulsaciones">
+      <label for="apellidos">Peso:</label>
+      <input class="form-control" id="apellidos" [(ngModel)]="contacto.apellidos" placeholder="peso">
+      <label for="email">Calorías consumidas estimadas:</label>
+      <input class="form-control" id="email" [(ngModel)]="contacto.email" placeholder="calorias">
+      <label for="telefono">Tiempo de ejercicio:</label>
+      <input class="form-control" id="telefono" [(ngModel)]="contacto.telefono" placeholder="tiempo">
+      <label for="telefono">Comentario:</label>
+      <input class="form-control" id="telefono" [(ngModel)]="contacto.telefono" placeholder="comentario">
+      <label for="telefono">Vídeo/foto:</label>
+      <input class="form-control" id="telefono" [(ngModel)]="contacto.telefono" placeholder="url">
+      <div class="form-check">
+        <label class="form-check-label" for="exampleCheckbox">Presencial </label>
+        <input class="form-check-input" type="checkbox" id="exampleCheckbox">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="fechaInicio">Fecha de inicio:</label>
+          <input type="date" class="form-control" id="fechaInicio">
+        </div>
+        <div class="col-md-6 mt-2 mt-md-0">
+          <label for="fechaFin">Fecha de fin:</label>
+          <input type="date" class="form-control" id="fechaFin">
+        </div>
+      </div>
+
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
+</div>
