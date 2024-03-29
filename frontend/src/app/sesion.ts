@@ -1,5 +1,5 @@
 
-export interface Contacto {
+export interface Sesion {
   id: number;
   nombre: string;
   apellidos: string;
