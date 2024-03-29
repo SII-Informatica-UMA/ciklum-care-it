@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'practica5'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.contactoElegido).toBeUndefined();
+    expect(app.sesionElegido).toBeUndefined();
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lista de contactos');
+    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lista de sesiones');
   });
 });

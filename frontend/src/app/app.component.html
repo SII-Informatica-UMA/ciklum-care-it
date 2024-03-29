@@ -1,21 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h1>Lista de contactos</h1>
+      <h1>Lista de sesiones</h1>
       <div class="list-group">
-        <button *ngFor="let contacto of contactos"
+        <button *ngFor="let sesion of sesiones"
           class="list-group-item list-group-item-action"
-          (click)="elegirContacto(contacto)"
-          [class.active]="contacto === contactoElegido">{{contacto.nombre}}</button>
+          (click)="elegirSesion(sesion)"
+          [class.active]="sesion === sesionElegido">{{sesion.nombre}}</button>
       </div>
       <br>
-      <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirContacto()"></button>
+      <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()"></button>
     </div>
-    <div class="col-md-6" *ngIf="contactoElegido">
-      <app-detalle-contacto [contacto]="contactoElegido"
-        (contactoEditado)="contactoEditado($event)"
-        (contactoEliminado)="eliminarContacto($event)"
-        ></app-detalle-contacto>
+    <div class="col-md-6" *ngIf="sesionElegido">
+      <app-detalle-sesion [sesion]="sesionElegido"
+        (sesionEditada)="sesionEditada($event)"
+        (sesionEliminada)="eliminarSesion($event)"
+        ></app-detalle-sesion>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Contacto } from './contacto';
-import {ContactosService } from './contactos.service';
+import {Sesion } from './sesion';
+import {SesionesService } from './sesiones.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.component'
 
@@ -10,38 +10,38 @@ import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.c
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  contactos: Contacto [] = [];
-  contactoElegido?: Contacto;
+  sesiones: Sesion [] = [];
+  sesionElegido?: Sesion;
 
-  constructor(private contactosService: ContactosService, private modalService: NgbModal) { }
+  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.contactos = this.contactosService.getContactos();
+    this.sesiones = this.sesionesService.getSesiones();
   }
 
-  elegirContacto(contacto: Contacto): void {
-    this.contactoElegido = contacto;
+  elegirSesion(sesion: Sesion): void {
+    this.sesionElegido = sesion;
   }
 
-  aniadirContacto(): void {
+  aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.contacto = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
-    ref.result.then((contacto: Contacto) => {
-      this.contactosService.addContacto(contacto);
-      this.contactos = this.contactosService.getContactos();
+    ref.componentInstance.sesion = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
+    ref.result.then((sesion: Sesion) => {
+      this.sesionesService.addSesion(sesion);
+      this.sesiones = this.sesionesService.getSesiones();
     }, (reason) => {});
 
   }
-  contactoEditado(contacto: Contacto): void {
-    this.contactosService.editarContacto(contacto);
-    this.contactos = this.contactosService.getContactos();
-    this.contactoElegido = this.contactos.find(c => c.id == contacto.id);
+  sesionEditada(sesion: Sesion): void {
+    this.sesionesService.editarSesion(sesion);
+    this.sesiones = this.sesionesService.getSesiones();
+    this.sesionElegido = this.sesiones.find(c => c.id == sesion.id);
   }
 
-  eliminarContacto(id: number): void {
-    this.contactosService.eliminarContacto(id);
-    this.contactos = this.contactosService.getContactos();
-    this.contactoElegido = undefined;
+  eliminarSesion(id: number): void {
+    this.sesionesService.eliminarSesion(id);
+    this.sesiones = this.sesionesService.getSesiones();
+    this.sesionElegido = undefined;
   }
 }
