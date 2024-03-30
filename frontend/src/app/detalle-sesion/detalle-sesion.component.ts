@@ -14,7 +14,7 @@ export class DetalleSesionComponent {
   @Output() sesionEditada = new EventEmitter<Sesion>();
   @Output() sesionEliminada = new EventEmitter<number>();
 
-  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
   editarSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);

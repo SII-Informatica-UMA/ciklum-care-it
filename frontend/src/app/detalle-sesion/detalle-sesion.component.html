@@ -1,24 +1,40 @@
 <div class="container">
   <div class="row">
-    <h2 >Detalles de {{sesion?.nombre}}</h2>
+    <h2 >Detalles de <!--{{sesion?.inicio?.toLocaleString()}}--></h2>
   </div>
 
+<!--
 <div class="row">
-  <label class="col-md-3" for="nombre">Nombre:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.nombre}}</span>
+  <label class="col-md-3">Fecha de inicio:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio?.toLocaleString()}}</span>
 </div>
 <div class="row">
-  <label class="col-md-3" for="nombre">Apellidos:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.apellidos}}</span>
+  <label class="col-md-3">Fecha de fin:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.fin?.toLocaleString()}}</span>
 </div>
 <div class="row">
-  <label class="col-md-3" for="nombre">E-mail:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.email}}</span>
+  <label class="col-md-3">Trabajo realizado:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.trabajoRealizado}}</span>
 </div>
 <div class="row">
-  <label class="col-md-3" for="nombre">Teléfono:</label>
-  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.telefono}}</span>
+  <label class="col-md-3">Multimedia:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.multimedia}}</span>
 </div>
+<div class="row">
+  <label class="col-md-3">Descripción:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.descripcion}}</span>
+</div>
+<div class="row">
+  <label class="col-md-3">Presencial:</label>
+  <div class="col-md-9 offset-2 offset-md-0">
+    <input type="checkbox" [ngModel]="sesion?.presencial" disabled>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3">Datos de salud:</label>
+  <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud}}</span>
+</div>
+-->
 
 <div class="row">
   <button class="col-auto btn btn-outline-primary" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>

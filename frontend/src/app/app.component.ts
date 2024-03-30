@@ -10,13 +10,14 @@ import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.c
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  idPlan: number = 1;
   sesiones: Sesion [] = [];
   sesionElegido?: Sesion;
 
   constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.sesiones = this.sesionesService.getSesiones();
+    this.sesiones = this.sesionesService.getSesiones(this.idPlan);
   }
 
   elegirSesion(sesion: Sesion): void {
@@ -26,22 +27,24 @@ export class AppComponent implements OnInit {
   aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.sesion = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
+    ref.componentInstance.sesion = {idPlan: this.idPlan, inicio: new Date(), fin: new Date(), 
+	trabajoRealizado: '', multimedia: [],
+	descripcion: '', presencial: true, datosSalud: [], id: 0};
     ref.result.then((sesion: Sesion) => {
       this.sesionesService.addSesion(sesion);
-      this.sesiones = this.sesionesService.getSesiones();
+      this.sesiones = this.sesionesService.getSesiones(this.idPlan);
     }, (reason) => {});
 
   }
   sesionEditada(sesion: Sesion): void {
     this.sesionesService.editarSesion(sesion);
-    this.sesiones = this.sesionesService.getSesiones();
+    this.sesiones = this.sesionesService.getSesiones(this.idPlan);
     this.sesionElegido = this.sesiones.find(c => c.id == sesion.id);
   }
 
   eliminarSesion(id: number): void {
     this.sesionesService.eliminarSesion(id);
-    this.sesiones = this.sesionesService.getSesiones();
+    this.sesiones = this.sesionesService.getSesiones(this.idPlan);
     this.sesionElegido = undefined;
   }
 }

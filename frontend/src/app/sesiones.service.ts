@@ -6,15 +6,24 @@ import {Sesion } from './sesion';
 })
 export class SesionesService {
   private sesiones: Sesion [] = [
-    {id: 1, nombre: 'Juan', apellidos: 'Pérez', email: 'perez@uma.es', telefono: '666666666'},
-    {id: 2, nombre: 'Ana', apellidos: 'García', email: 'ana@uma.es', telefono: '55555555'},
-    {id: 3, nombre: 'Luis', apellidos: 'González', email: 'gonzalez@uma.es', telefono: '444444444'},
+    {idPlan: 1, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
+	trabajoRealizado: 'Trabajo realizado', multimedia: [],
+	descripcion: 'Descripción1', presencial: true, datosSalud: [], id: 1},
+    {idPlan: 1, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
+	trabajoRealizado: 'Trabajo realizado', multimedia: [],
+	descripcion: 'Descripción2', presencial: false, datosSalud: [], id: 2},
+    {idPlan: 2, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
+	trabajoRealizado: 'Trabajo realizado', multimedia: [],
+	descripcion: 'Descripción3', presencial: true, datosSalud: [], id: 3},
+	{idPlan: 2, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
+	trabajoRealizado: 'Trabajo realizado', multimedia: [],
+	descripcion: 'Descripción4', presencial: true, datosSalud: [], id: 4},
   ];
 
   constructor() { }
 
-  getSesiones(): Sesion [] {
-    return this.sesiones;
+  getSesiones(idPlan: number): Sesion [] {
+    return this.sesiones.filter(sesion => sesion.idPlan === idPlan);
   }
 
   addSesion(sesion: Sesion) {
