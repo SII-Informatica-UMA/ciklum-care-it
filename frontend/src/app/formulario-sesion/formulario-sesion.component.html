@@ -4,32 +4,54 @@
 </div>
 <div class="modal-body">
   <div class="form-group">
-      <label for="pulsaciones">Pulsaciones del corazón:</label>
-      <input class="form-control" id="nombre" placeholder="pulsaciones">
-      <label for="apellidos">Peso:</label>
-      <input class="form-control" id="apellidos" placeholder="peso">
-      <label for="email">Calorías consumidas estimadas:</label>
-      <input class="form-control" id="email" placeholder="calorias">
-      <label for="telefono">Tiempo de ejercicio:</label>
-      <input class="form-control" id="telefono" placeholder="tiempo">
-      <label for="telefono">Comentario:</label>
-      <input class="form-control" id="telefono" placeholder="comentario">
-      <label for="telefono">Vídeo/foto:</label>
-      <input class="form-control" id="telefono" placeholder="url">
-      <div class="form-check">
-        <label class="form-check-label" for="exampleCheckbox">Presencial </label>
-        <input class="form-check-input" type="checkbox" id="exampleCheckbox">
-      </div>
       <div class="row">
         <div class="col-md-6">
-          <label for="fechaInicio">Fecha de inicio:</label>
-          <input type="date" class="form-control" id="fechaInicio">
-        </div>
-        <div class="col-md-6 mt-2 mt-md-0">
-          <label for="fechaFin">Fecha de fin:</label>
-          <input type="date" class="form-control" id="fechaFin">
+         <label for="fechaInicio">Inicio:</label>
+         <input type="date" class="form-control" id="inicio" [(ngModel)]="sesion.inicio">
+       </div>
+       <div class="col-md-6 mt-2 mt-md-0">
+          <label for="fechaFin">Fin:</label>
+          <input type="date" class="form-control" id="fin" [(ngModel)]="sesion.fin">
         </div>
       </div>
+      
+      <label for="trabajo">Trabajo realizado:</label>
+      <textarea class="form-control" id="trabajo" rows="5" [(ngModel)]="sesion.trabajoRealizado"></textarea>
+  
+      <label for="video">Vídeo:</label>
+      <input class="form-control"  id="video"  type="url" placeholder="Enlace a video" [(ngModel)]="sesion.multimedia[0]">
+
+      <label for="foto">Foto:</label>
+      <input class="form-control"  id="foto"  type="url" placeholder="Enlace a foto" [(ngModel)]="sesion.multimedia[1]">
+
+      <label for="descripcion">Descripción:</label>
+      <textarea class="form-control" id="descripcion" rows="5" [(ngModel)]="sesion.descripcion"></textarea>
+      
+      <fieldset>
+        <label>Datos de salud:</label>
+      
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Pulsaciones">
+          <span class="input-group-text" id="pulsaciones-addon" [(ngModel)]="sesion.datosSalud[0]">pulsaciones/min</span>
+        </div>
+      
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Peso" [(ngModel)]="sesion.datosSalud[1]">
+          <span class="input-group-text">kg</span>
+        </div>
+      
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Calorias consumidas" [(ngModel)]="sesion.datosSalud[2]">
+          <span class="input-group-text">cal</span>
+        </div>
+      </fieldset>
+
+      
+      <label class="form-check-label" for="presencial">Marcar si el entrenamiento fue presencial </label>
+      <input class="form-check-input" type="checkbox" id="presencial" [(ngModel)]="sesion.presencial">
+      
+   
+      
 
   </div>
 </div>
