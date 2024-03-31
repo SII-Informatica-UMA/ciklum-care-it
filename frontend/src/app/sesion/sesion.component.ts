@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Sesion } from './sesion';
+import { Component, Input, OnInit } from '@angular/core';
+import {Sesion } from '../sesion';
 import {SesionesService } from '../sesiones.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.sesiones = this.sesionesService.getSesiones(this.plan.id);
+    this.sesiones = this.sesionesService.getSesiones(this.plan?.id);
   }
 
   elegirSesion(sesion: Sesion): void {

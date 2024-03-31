@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {Sesion } from '../sesion/sesion';
+import {Sesion } from '../sesion';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
 import { SesionesService } from '../sesiones.service';

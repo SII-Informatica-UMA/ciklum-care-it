@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Sesion } from './sesion/sesion';
+import {Sesion } from './sesion';
 
 @Injectable({
   providedIn: 'root'
