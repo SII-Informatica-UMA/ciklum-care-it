@@ -39,7 +39,7 @@ export class SesionComponent implements OnInit {
 
   eliminarSesion(id: number): void {
     this.sesionesService.eliminarSesion(id);
-    this.sesiones = this.sesionesService.getSesiones(this.plan.id);
+    this.sesiones = this.sesionesService.getSesiones(this.plan?.id);
     this.sesionElegida = undefined;
     
   }
