@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import  {Sesion} from '../sesion';
+import  {Sesion} from '../sesion/sesion';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

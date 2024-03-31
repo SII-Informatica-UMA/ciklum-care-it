@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Sesion } from './sesion';
-import {SesionesService } from './sesiones.service';
+import {SesionesService } from '../sesiones.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioSesionComponent} from './formulario-sesion/formulario-sesion.component'
-import {Plan} from './plan';
+import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
+import {Plan} from '../plan';
 
 @Component({
   selector: 'app-root',
