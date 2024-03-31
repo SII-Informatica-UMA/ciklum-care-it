@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Lista de sesiones</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr><th>Inicio</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sesion of sesiones">
+              <td>{{sesion.Inicio.tolocalestring()}}</td>
+              <td><button type="button" class="btn btn-outline-primary btn-sm bi bi-pencil-fill" (click)="editarSesion(sesion)"></button>
+              &nbsp;
+              <button type="button" class="btn btn-outline-danger btn-sm bi bi-trash-fill" (click)="eliminarSesion(sesion.id)"></button></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <br>
+        <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="aniadirSesion()"></button>
+        <div class="col-md-6" *ngIf="sesionElegida">
+          <app-detalle-sesion [sesion]="sesionElegida"
+            (sesionEditada)="editarSesion($event)"
+            (sesionEliminada)="eliminarSesion($event)"
+            ></app-detalle-sesion>
+        </div>
+      </div>
+    </div>
+  </div>
+  
