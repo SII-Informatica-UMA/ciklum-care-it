@@ -11,7 +11,7 @@ import {Plan} from '../plan';
   styleUrls: ['./sesion.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class SesionComponent implements OnInit {
   sesiones: Sesion [] = [];
   sesionElegida?: Sesion;
   @Input() plan?: Plan;
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.sesiones = this.sesionesService.getSesiones(this.plan?.id);
+    this.sesiones = this.sesionesService.getSesiones(this?.plan.id);
   }
 
   elegirSesion(sesion: Sesion): void {
@@ -29,10 +29,10 @@ export class AppComponent implements OnInit {
   aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.contacto = {idPlan: this.plan.id, inicio: '', fin: '', trabajoRealizado: '', multimedia: [''], descripcion: '', presencial: false, datosSalud: [''], id: 0};
+    ref.componentInstance.contacto = {idPlan: this.plan?.id, inicio: '', fin: '', trabajoRealizado: '', multimedia: [''], descripcion: '', presencial: false, datosSalud: [''], id: 0};
     ref.result.then((sesion: Sesion) => {
       this.sesionesService.addSesion(sesion);
-      this.sesiones = this.sesionesService.getSesiones(this.plan.id);
+      this.sesiones = this.sesionesService.getSesiones(this.plan?.id);
     }, (reason) => {});
 
   }

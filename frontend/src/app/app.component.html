@@ -9,6 +9,9 @@
           [class.active]="plan === planElegido">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</button>
       </div>
       <br>
+      <div class="col-md-6" *ngIf="planElegido">
+        <app-sesion [plan]="planElegido"></app-sesion>
+      </div>
     </div>
   </div>
 </div>
