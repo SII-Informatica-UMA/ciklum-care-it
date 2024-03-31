@@ -50,6 +50,7 @@ export class SesionComponent implements OnChanges {
     ref.componentInstance.sesion = {...sesion};
     ref.result.then((sesionModificada: Sesion) => {
       this.sesionesService.editarSesion(sesionModificada);
+      this.sesiones = this.sesionesService.getSesiones(this.plan?.id!);
     }, (reason) => {});
   }
 }
