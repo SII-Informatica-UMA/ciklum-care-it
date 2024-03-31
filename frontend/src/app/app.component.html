@@ -1,23 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h1>Lista de sesiones</h1>
+      <h1>Lista de planes</h1>
       <div class="list-group">
-        <button *ngFor="let sesion of sesiones"
+        <button *ngFor="let plan of planes"
           class="list-group-item list-group-item-action"
-          (click)="elegirSesion(sesion)"
-          [class.active]="sesion === sesionElegido">{{sesion.id}}</button>
+          (click)="elegirPlan(plan)"
+          [class.active]="plan === planElegido">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</button>
       </div>
       <br>
-      <button type="button" class="btn btn-outline-primary bi bi-plus-lg" (click)="aniadirSesion()"></button>
-    </div>
-    <div class="col-md-6" *ngIf="sesionElegido">
-      <app-detalle-sesion [sesion]="sesionElegido"
-        (sesionEditada)="sesionEditada($event)"
-        (sesionEliminada)="eliminarSesion($event)"
-        ></app-detalle-sesion>
     </div>
   </div>
 </div>
-
-
