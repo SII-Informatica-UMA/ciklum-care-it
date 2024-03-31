@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <h2 >Detalles de <!--{{sesion?.inicio?.toLocaleString()}}--></h2>
+    <h2 >Detalles de {{sesion?.inicio?.toLocaleString()}}</h2>
   </div>
 
-<!--
+
 <div class="row">
   <label class="col-md-3">Fecha de inicio:</label>
   <span class="col-md-9 offset-2 offset-md-0">{{sesion?.inicio?.toLocaleString()}}</span>
@@ -34,7 +34,7 @@
   <label class="col-md-3">Datos de salud:</label>
   <span class="col-md-9 offset-2 offset-md-0">{{sesion?.datosSalud}}</span>
 </div>
--->
+
 
 <div class="row">
   <button class="col-auto btn btn-outline-primary" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>
