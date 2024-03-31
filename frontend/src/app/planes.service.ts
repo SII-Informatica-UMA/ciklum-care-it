@@ -7,9 +7,9 @@ import {Plan } from './plan';
 
 export class PlanesService {
   private planes: Plan [] = [
-    {id: 1, idRutina: 1, reglaRecurrencia: "" ,fechaInicio: "2024-03-28T15:27:53.893Z", fechaFin: "2024-03-28T15:27:53.893Z"},
-    {id: 2, idRutina: 2, reglaRecurrencia: "" , fechaInicio: "2024-04-20T15:27:53.893Z", fechaFin: "2024-05-28T15:27:53.893Z"},
-    {id: 3, idRutina: 3, reglaRecurrencia: "" , fechaInicio: "2024-06-28T15:27:53.893Z", fechaFin: "2024-07-28T15:27:53.893Z"},
+    {id: 1, idRutina: 1, reglaRecurrencia: "" ,fechaInicio: new Date('2024-03-29T08:00:00'), fechaFin: new Date('2025-03-29T08:00:00')},
+    {id: 2, idRutina: 2, reglaRecurrencia: "" , fechaInicio: new Date('2025-03-29T08:00:00'), fechaFin: new Date('2026-03-29T08:00:00')},
+    {id: 3, idRutina: 3, reglaRecurrencia: "" , fechaInicio: new Date('2026-03-29T08:00:00'), fechaFin: new Date('2027-03-29T08:00:00')},
   ];
 
   constructor() { }

@@ -6,7 +6,7 @@
         <button *ngFor="let plan of planes"
           class="list-group-item list-group-item-action"
           (click)="elegirPlan(plan)"
-          [class.active]="plan === planElegido">{{plan.fechaInicio}} - {{plan.fechaFin}}</button>
+          [class.active]="plan === planElegido">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</button>
       </div>
       <br>
     </div>
