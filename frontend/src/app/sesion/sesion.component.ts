@@ -6,7 +6,7 @@ import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.
 import {Plan} from '../plan';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-sesion',
   templateUrl: './sesion.component.html',
   styleUrls: ['./sesion.component.css']
 })
