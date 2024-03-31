@@ -8,7 +8,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let sesion of sesiones">
-              <td>{{sesion.Inicio.tolocalestring()}}</td>
+              <td>{{sesion.inicio.toLocaleString()}}</td>
               <td><button type="button" class="btn btn-outline-primary btn-sm bi bi-pencil-fill" (click)="editarSesion(sesion)"></button>
               &nbsp;
               <button type="button" class="btn btn-outline-danger btn-sm bi bi-trash-fill" (click)="eliminarSesion(sesion.id)"></button></td>
