@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   it(`should have as title 'practica5'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.sesionElegido).toBeUndefined();
+    expect(app.planElegido).toBeUndefined();
   });
 
   it('should render title', () => {
