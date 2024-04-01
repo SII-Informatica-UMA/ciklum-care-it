@@ -15,7 +15,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent implements OnInit {
   planes: Plan [] = [];
   sesionesPlan: Sesion [] = [];
-  planElegido?: Plan
+  planElegido?: Plan;
 
   constructor(private sesionesService: SesionesService, private planesService: PlanesService, private modalService: NgbModal) { }
 
