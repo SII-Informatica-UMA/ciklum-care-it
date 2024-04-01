@@ -10,7 +10,7 @@
       </div>
       <br>
       <div class="col-md-6" *ngIf="planElegido">
-        <app-sesion [plan]="planElegido"></app-sesion>
+        <app-sesion [sesiones]="sesionesPlan" [planId]="planElegido.id"></app-sesion>
       </div>
     </div>
   </div>
