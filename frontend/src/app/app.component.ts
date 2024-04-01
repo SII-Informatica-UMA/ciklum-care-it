@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Plan } from './plan';
 import { PlanesService } from './planes.service';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-root',
@@ -21,5 +22,6 @@ export class AppComponent implements OnInit {
 
   elegirPlan(plan: Plan): void {
     this.planElegido = plan;
+    this.planesService.planCambiado();
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import {Sesion } from '../sesion';
 import {SesionesService } from '../sesiones.service';
+import {PlanesService } from '../planes.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioSesionComponent} from '../formulario-sesion/formulario-sesion.component'
 import {Plan} from '../plan';
@@ -13,10 +14,17 @@ import {Plan} from '../plan';
 
 export class SesionComponent implements OnChanges {
   sesiones: Sesion [] = [];
-  sesionElegida?: Sesion;
+  @Input() sesionElegida?: Sesion;
   @Input() plan?: Plan;
 
-  constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
+  constructor(private planesService: PlanesService, private sesionesService: SesionesService, 
+    private modalService: NgbModal) { }
+
+  ngOnInit() {
+    this.planesService.planCambiado$.subscribe(() => {
+      this.sesionElegida = undefined;
+    });
+  }
 
   ngOnChanges(): void {
     this.sesiones = this.sesionesService.getSesiones(this.plan?.id!);
