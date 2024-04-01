@@ -2,19 +2,12 @@
     <div class="row">
       <div class="col-md-6">
         <h1>Lista de sesiones</h1>
-        <table class="table table-striped">
-          <thead>
-            <tr><th>Inicio</th></tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let sesion of sesiones">
-              <td>{{sesion.inicio.toLocaleString()}}</td>
-              <td><button type="button" class="btn btn-outline-primary btn-sm bi bi-pencil-fill" (click)="editarSesion(sesion)"></button>
-              &nbsp;
-              <button type="button" class="btn btn-outline-danger btn-sm bi bi-trash-fill" (click)="eliminarSesion(sesion.id)"></button></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="list-group">
+          <button *ngFor="let sesion of sesiones"
+                  class="list-group-item list-group-item-action"
+                  (click)="elegirSesion(sesion)"
+                  [class.active]="sesion === sesionElegida">{{sesion?.inicio?.toLocaleString()}} - {{sesion?.fin?.toLocaleString()}}</button>
+        </div>
         
         <br>
         <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="aniadirSesion()"></button>
