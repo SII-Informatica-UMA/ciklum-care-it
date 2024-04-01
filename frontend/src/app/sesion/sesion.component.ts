@@ -14,7 +14,7 @@ import {Plan} from '../plan';
 
 export class SesionComponent implements OnChanges {
   sesiones: Sesion [] = [];
-  @Input() sesionElegida?: Sesion;
+  sesionElegida?: Sesion;
   @Input() plan?: Plan;
 
   constructor(private planesService: PlanesService, private sesionesService: SesionesService, 
