@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import {Sesion } from '../sesion';
 import {SesionesService } from '../sesiones.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -11,14 +11,14 @@ import {Plan} from '../plan';
   styleUrls: ['./sesion.component.css']
 })
 
-export class SesionComponent implements OnInit {
+export class SesionComponent implements OnChanges {
   sesiones: Sesion [] = [];
   sesionElegida?: Sesion;
   @Input() plan?: Plan;
 
   constructor(private sesionesService: SesionesService, private modalService: NgbModal) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.sesiones = this.sesionesService.getSesiones(this.plan?.id!);
   }
 
@@ -47,9 +47,10 @@ export class SesionComponent implements OnInit {
   editarSesion(sesion: Sesion): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Editar";
-    ref.componentInstance.contacto = {...sesion};
-    ref.result.then((sesion: Sesion) => {
-      this.sesionesService.editarSesion(sesion);
+    ref.componentInstance.sesion = {...sesion};
+    ref.result.then((sesionModificada: Sesion) => {
+      this.sesionesService.editarSesion(sesionModificada);
+      this.sesiones = this.sesionesService.getSesiones(this.plan?.id!);
     }, (reason) => {});
   }
 }

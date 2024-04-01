@@ -9,7 +9,7 @@ export class SesionesService {
     {idPlan: 1, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
 	descripcion: 'Descripción1', presencial: true, datosSalud: [], id: 1},
-    {idPlan: 1, inicio: new Date('2024-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
+    {idPlan: 1, inicio: new Date('2024-03-30T08:00:00'), fin: new Date('2024-03-30T09:00:00'), 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
 	descripcion: 'Descripción2', presencial: false, datosSalud: [], id: 2},
     {idPlan: 2, inicio: new Date('3000-03-29T08:00:00'), fin: new Date('2024-03-29T09:00:00'), 
