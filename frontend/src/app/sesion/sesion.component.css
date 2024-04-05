@@ -1,0 +1,17 @@
+/* Animación para el "hola" */
+@keyframes holaSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Estilo para el "hola" */
+  .hola-animation {
+    animation: holaSlideIn 0.5s ease-in-out;
+  }
+  

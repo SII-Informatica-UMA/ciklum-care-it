@@ -1,23 +1,25 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h1>Lista de sesiones</h1>
-        <div class="list-group">
-          <button *ngFor="let sesion of sesiones"
-                  class="list-group-item list-group-item-action"
-                  (click)="elegirSesion(sesion)"
-                  [class.active]="sesion === sesionElegida">{{sesion?.inicio?.toLocaleString()}} - {{sesion?.fin?.toLocaleString()}}</button>
-        </div>
-        
-        <br>
-        <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="aniadirSesion()"></button>
-        <div class="col-md-6" *ngIf="sesionElegida">
-          <app-detalle-sesion [sesion]="sesionElegida"
-            (sesionEditada)="editarSesion($event)"
-            (sesionEliminada)="eliminarSesion($event)"
-            ></app-detalle-sesion>
-        </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Lista de sesiones</h2>
+      <div class="list-group">
+        <button *ngFor="let sesion of sesiones"
+                class="list-group-item list-group-item-action"
+                (click)="elegirSesion(sesion)"
+                [class.active]="sesion === sesionElegida">{{sesion?.inicio?.toLocaleString()}} - {{sesion?.fin?.toLocaleString()}}</button>
       </div>
+      
+      <br>
+      <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="aniadirSesion()"></button>
+    </div>
+    
+    <!-- Detalles de sesión -->
+    <div class="col-md-6" *ngIf="sesionElegida">
+        <app-detalle-sesion [sesion]="sesionElegida"
+          (sesionEditada)="editarSesion($event)"
+          (sesionEliminada)="eliminarSesion($event)"
+          ></app-detalle-sesion>
+     
     </div>
   </div>
-  
+</div>
