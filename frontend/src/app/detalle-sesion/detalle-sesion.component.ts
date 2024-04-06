@@ -20,6 +20,8 @@ export class DetalleSesionComponent {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Editar";
     ref.componentInstance.sesion = {...this.sesion};
+    ref.componentInstance.sesion.multimedia = {...this.sesion?.multimedia};
+    ref.componentInstance.sesion.datosSalud = {...this.sesion?.datosSalud};
     ref.result.then((sesion: Sesion) => {
       this.sesionEditada.emit(sesion);
     }, (reason) => {});

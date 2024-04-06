@@ -17,8 +17,12 @@
   <span class="col-lg-6 offset-2 offset-md-0 text">{{sesion?.trabajoRealizado}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Multimedia:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia}}</span>
+  <label class="col-lg-6">Vídeo:</label>
+  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[0] ?? ''}}</span>
+</div>
+<div class="row">
+  <label class="col-lg-6">Foto:</label>
+  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[1] ?? ''}}</span>
 </div>
 <div class="row">
   <label class="col-lg-6">Descripción:</label>
@@ -31,9 +35,16 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-lg-6">Datos de salud:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.datosSalud}}</span>
+  <label class="col-lg-6">Datos de salud:</label> 
+  <div class="col-lg-6 offset-2 offset-md-0">
+      <div>Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
+      <div>Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
+      <div>Calorías: {{sesion?.datosSalud?.[2] ??  ''}}</div>
+  </div>
+  
 </div>
+
+
 
 
 <div class="row">
