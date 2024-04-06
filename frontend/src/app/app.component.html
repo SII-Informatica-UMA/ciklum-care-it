@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h1>Lista de planes</h1>
       <div class="list-group">
         <button *ngFor="let plan of planes"
@@ -9,7 +9,7 @@
           [class.active]="plan === planElegido">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</button>
       </div>
     </div>
-    <div class="col-md-6" *ngIf="planElegido">
+    <div class="col-md-8" *ngIf="planElegido">
       <app-sesion [sesiones]="sesionesPlan" [planId]="planElegido.id"></app-sesion>
     </div>
   </div>
