@@ -1,0 +1,5 @@
+.text {
+    word-wrap: break-word; /* partirse en palabras si supera el ancho del contenedor */
+    overflow-wrap: break-word; /* lo mismo para navegadores más antiguos */
+    max-width: 100%; 
+  }
