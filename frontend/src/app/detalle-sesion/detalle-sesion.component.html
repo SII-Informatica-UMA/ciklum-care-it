@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row mt-2">
-    <h4 >Detalles de {{sesion?.inicio?.toLocaleString()}}</h4>
+    <h4 >Detalles de {{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</h4>
   </div>
 
 
 <div class="row">
   <label class="col-lg-6">Fecha de inicio:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.inicio?.toLocaleString()}}</span>
+  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</span>
 </div>
 <div class="row">
   <label class="col-lg-6">Fecha de fin:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.fin?.toLocaleString()}}</span>
+  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</span>
 </div>
 <div class="row">
   <label class="col-lg-6">Trabajo realizado:</label>

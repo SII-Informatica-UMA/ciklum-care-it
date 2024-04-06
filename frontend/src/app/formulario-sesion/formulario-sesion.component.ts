@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FormularioSesionComponent {
   accion?: "Añadir" | "Editar";
-  sesion: Sesion = {idPlan: 0, inicio: new Date(), fin: new Date(), 
+  sesion: Sesion = {idPlan: 0, inicio: '', fin: '', 
 	trabajoRealizado: '', multimedia: [],
 	descripcion: '', presencial: true, datosSalud: [], id: 0};
 

@@ -6,7 +6,7 @@
         <button *ngFor="let sesion of sesiones"
                 class="list-group-item list-group-item-action"
                 (click)="elegirSesion(sesion)"
-                [class.active]="sesion === sesionElegida">{{sesion?.inicio?.toLocaleString()}} - {{sesion?.fin?.toLocaleString()}}</button>
+                [class.active]="sesion === sesionElegida">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}} - {{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</button>
       </div>
       
       <br>
