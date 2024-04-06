@@ -30,6 +30,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lista de sesiones');
+    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lista de planes');
   });
 });
