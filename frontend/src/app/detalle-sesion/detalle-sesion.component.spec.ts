@@ -24,3 +24,4 @@ describe('DetalleSesionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+**/

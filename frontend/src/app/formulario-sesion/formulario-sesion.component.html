@@ -30,18 +30,18 @@
       <fieldset>
         <label>Datos de salud:</label>
       
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Pulsaciones" [(ngModel)]="sesion.datosSalud[0]">
+        <div class="input-group mb-3" >
+          <input type="text" class="form-control" placeholder="Pulsaciones" id="pulsaciones" [(ngModel)]="sesion.datosSalud[0]">
           <span class="input-group-text" >pulsaciones/min</span>
         </div>
       
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Peso" [(ngModel)]="sesion.datosSalud[1]">
+          <input type="text" class="form-control" placeholder="Peso" id="peso" [(ngModel)]="sesion.datosSalud[1]">
           <span class="input-group-text">kg</span>
         </div>
       
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Calorias consumidas" [(ngModel)]="sesion.datosSalud[2]">
+          <input type="text" class="form-control" placeholder="Calorias consumidas" id="calorias" [(ngModel)]="sesion.datosSalud[2]">
           <span class="input-group-text">cal</span>
         </div>
       </fieldset>
