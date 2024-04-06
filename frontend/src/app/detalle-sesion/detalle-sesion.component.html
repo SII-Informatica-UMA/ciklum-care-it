@@ -5,37 +5,37 @@
 
 
 <div class="row">
-  <label class="col-lg-6">Fecha de inicio:</label>
+  <label class="col-lg-6 label">Fecha de inicio:</label>
   <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Fecha de fin:</label>
+  <label class="col-lg-6 label">Fecha de fin:</label>
   <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Trabajo realizado:</label>
+  <label class="col-lg-6 label">Trabajo realizado:</label>
   <span class="col-lg-6 offset-2 offset-md-0 text">{{sesion?.trabajoRealizado}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Vídeo:</label>
+  <label class="col-lg-6 label">Vídeo:</label>
   <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[0] ?? ''}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Foto:</label>
+  <label class="col-lg-6 label">Foto:</label>
   <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[1] ?? ''}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Descripción:</label>
+  <label class="col-lg-6 label">Descripción:</label>
   <span class="col-lg-6 offset-2 offset-md-0 text">{{sesion?.descripcion}}</span>
 </div>
 <div class="row">
-  <label class="col-lg-6">Presencial:</label>
+  <label class="col-lg-6 label">Presencial:</label>
   <div class="col-lg-6 offset-2 offset-md-0">
     <input type="checkbox" [ngModel]="sesion?.presencial" disabled>
   </div>
 </div>
 <div class="row">
-  <label class="col-lg-6">Datos de salud:</label> 
+  <label class="col-lg-6 label">Datos de salud:</label> 
   <div class="col-lg-6 offset-2 offset-md-0">
       <div>Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
       <div>Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
