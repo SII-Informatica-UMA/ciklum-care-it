@@ -47,8 +47,8 @@
       </fieldset>
 
       
-      <label class="form-check-label" for="presencial">Marcar si el entrenamiento fue presencial </label>
-      <input class="form-check-input" type="checkbox" id="presencial" [(ngModel)]="sesion.presencial">
+      <label for="presencial">Marcar si el entrenamiento fue presencial </label>
+      <input class="form-check-input" id="presencial" type="checkbox"  [(ngModel)]="sesion.presencial">
       
    
       
@@ -56,5 +56,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="guardarSesion()">Guardar</button>
+  <button type="button" class="btn btn-outline-dark" title = "guardar" (click)="guardarSesion()">Guardar</button>
 </div>
