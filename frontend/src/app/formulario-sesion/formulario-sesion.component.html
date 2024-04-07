@@ -6,11 +6,11 @@
   <div class="form-group">
       <div class="row">
         <div class="col-md-6">
-         <label for="fechaInicio">Inicio:</label>
+         <label for="inicio">Inicio:</label>
          <input type="datetime-local" class="form-control" id="inicio" [(ngModel)]="sesion.inicio">
        </div>
        <div class="col-md-6 mt-2 mt-md-0">
-          <label for="fechaFin">Fin:</label>
+          <label for="fin">Fin:</label>
           <input type="datetime-local" class="form-control" id="fin" [(ngModel)]="sesion.fin">
         </div>
       </div>
@@ -28,7 +28,7 @@
       <textarea class="form-control" id="descripcion" rows="5" [(ngModel)]="sesion.descripcion"></textarea>
       
       <fieldset>
-        <label>Datos de salud:</label>
+        <p>Datos de salud:</p>
       
         <div class="input-group mb-3" >
           <input type="text" class="form-control" placeholder="Pulsaciones" id="pulsaciones" [(ngModel)]="sesion.datosSalud[0]">
