@@ -1,13 +1,14 @@
 .plan {
-    /*background-color: #ECCBD9;*/
-    background-color: #1d3557;
+    background-color: #026773;
     border-color: #457b9d;
     border-radius: 5px;
-    margin: 15px;
+    margin: 5px;
 }
 
 .planes {
     text-align: center;
+    background-color: #3CA6A6;
+    border-radius: 5px;
 }
 
 .text {
@@ -16,7 +17,7 @@
 }
 
 .row {
-    background-color: #457b9d;
+    background-color: #F2E3D5;
     height: 100%;
 }
 
@@ -24,12 +25,8 @@ h1 {
     font-family: fantasy;
     text-align: center;
     margin: 5px;
-    background-color: #f79d65;
     border: 0;
     border-radius: 5px;
-    color: white;
-}
-
-body {
-    background-color: #457b9d;
+    background-color: #012E40;
+    color: #F2E3D5;
 }

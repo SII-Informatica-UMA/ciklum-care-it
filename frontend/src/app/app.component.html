@@ -9,15 +9,19 @@
 <body>
  <div class="row vh-100 m-0">
     <div class="col-md-4">
+      <div class="planes">
       <h1>Lista de planes</h1>
-        <div *ngFor="let plan of planes" class="planes">
+      
+        <div *ngFor="let plan of planes">
           <button class="plan"
           (click)="elegirPlan(plan)"
           [class.active]="plan === planElegido"><div class="text">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</div>
           </button>
         </div>
+      
     </div>
-    <div class="col-md-8" *ngIf="planElegido">
+  </div>
+    <div class="col-md-8 caja2" *ngIf="planElegido">
       <app-sesion [sesiones]="sesionesPlan" [planId]="planElegido.id"></app-sesion>
     </div>
   </div>
