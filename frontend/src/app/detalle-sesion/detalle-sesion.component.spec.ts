@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 describe('DetalleSesionComponent', () => {
   let component: DetalleSesionComponent;
   let fixture: ComponentFixture<DetalleSesionComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,9 +19,14 @@ describe('DetalleSesionComponent', () => {
     fixture = TestBed.createComponent(DetalleSesionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    compiled = fixture.nativeElement as HTMLElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('debe haber dos botones', () => {
+    expect(compiled.querySelectorAll('button')).toHaveSize(2);
   });
 });
