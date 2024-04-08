@@ -6,6 +6,9 @@ import {Sesion } from './sesion';
 })
 export class SesionesService {
   private sesiones: Sesion [] = [
+    {idPlan: 2, inicio: '3000-10-29T08:00:00', fin: '2024-10-29T09:00:00', 
+	trabajoRealizado: 'Trabajo realizado', multimedia: [],
+	descripcion: 'Descripción4', presencial: true, datosSalud: [], id: 4},
     {idPlan: 1, inicio: '2024-03-29T08:00:00', fin: '2024-03-29T09:00:00', 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
 	descripcion: 'Descripción1', presencial: true, datosSalud: [], id: 1},
@@ -15,9 +18,6 @@ export class SesionesService {
     {idPlan: 2, inicio: '3000-03-29T08:00:00', fin: '2024-03-29T09:00:00', 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
 	descripcion: 'Descripción3', presencial: true, datosSalud: [], id: 3},
-	{idPlan: 2, inicio: '3000-03-29T08:00:00', fin: '2024-03-29T09:00:00', 
-	trabajoRealizado: 'Trabajo realizado', multimedia: [],
-	descripcion: 'Descripción4', presencial: true, datosSalud: [], id: 4},
   {idPlan: 2, inicio: '3000-03-29T08:00:00', fin: '2024-05-29T09:00:00', 
 	trabajoRealizado: 'AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH', multimedia: [],
 	descripcion: 'Descripción5. La verdad es que no me ha gustado nada este entrenamiento. Me gustaria que dejasen de poner ese tipo de cosas porque me acaba doliendo la espalda.', presencial: true, datosSalud: [], id: 4},

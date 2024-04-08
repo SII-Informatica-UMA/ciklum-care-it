@@ -24,6 +24,7 @@ export class SesionComponent implements OnInit {
     this.planesService.planCambiado$.subscribe(() => {
       this.sesionElegida = undefined;
     });
+    this.ordenarSesiones(this.sesiones);
   }
 
   elegirSesion(sesion: Sesion): void {
@@ -37,6 +38,7 @@ export class SesionComponent implements OnInit {
     ref.result.then((sesion: Sesion) => {
       this.sesionesService.addSesion(sesion);
       this.sesiones = this.sesionesService.getSesiones(this.planId!);
+      this.ordenarSesiones(this.sesiones);
     }, (reason) => {});
 
   }
@@ -52,5 +54,16 @@ export class SesionComponent implements OnInit {
     this.sesionesService.editarSesion(sesion);
     this.sesiones = this.sesionesService.getSesiones(this.planId!);
 	  this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);
+    this.ordenarSesiones(this.sesiones);
+  }
+
+  ordenarSesiones(contactos:Sesion[]){
+    this.sesiones.sort(this.ordenarPorFecha);
+  }
+
+  ordenarPorFecha(a:Sesion, b:Sesion){
+    if(new Date(a.inicio) < new Date(b.inicio)) return -1;
+    if(new Date(a.inicio) > new Date(b.inicio)) return 1;
+    return 0;
   }
 }
