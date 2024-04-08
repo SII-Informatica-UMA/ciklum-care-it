@@ -1,0 +1,35 @@
+.plan {
+    /*background-color: #ECCBD9;*/
+    background-color: #1d3557;
+    border-color: #457b9d;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.planes {
+    text-align: center;
+}
+
+.text {
+    margin: 15px;
+    color: white
+}
+
+.row {
+    background-color: #457b9d;
+    height: 100%;
+}
+
+h1 {
+    font-family: fantasy;
+    text-align: center;
+    margin: 5px;
+    background-color: #f79d65;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+}
+
+body {
+    background-color: #457b9d;
+}

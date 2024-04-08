@@ -1,16 +1,24 @@
-<div class="container">
-  <div class="row">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de planes</title>
+    <link href="app.component.css" rel="stylesheet">
+</head>
+<body>
+ <div class="row vh-100 m-0">
     <div class="col-md-4">
       <h1>Lista de planes</h1>
-      <div class="list-group">
-        <button *ngFor="let plan of planes"
-          class="list-group-item list-group-item-action"
+        <div *ngFor="let plan of planes" class="planes">
+          <button class="plan"
           (click)="elegirPlan(plan)"
-          [class.active]="plan === planElegido">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</button>
-      </div>
+          [class.active]="plan === planElegido"><div class="text">{{plan?.fechaInicio?.toLocaleString()}} - {{plan?.fechaFin?.toLocaleString()}}</div>
+          </button>
+        </div>
     </div>
     <div class="col-md-8" *ngIf="planElegido">
       <app-sesion [sesiones]="sesionesPlan" [planId]="planElegido.id"></app-sesion>
     </div>
   </div>
-</div>
+</body>

@@ -1,7 +1,16 @@
-<div class="container">
-  <div class="row mt-2">
-    <h4 >Detalles de {{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</h4>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles sesion</title>
+    <link href="detalle-sesion.component.css" rel="stylesheet">
+</head>
+<body>
+<div class="row vh-100 m-0">
+  <small class="row m-0">
+    <h1 >Detalles de {{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</h1>
+  </small>
 
 
 <div class="row">
@@ -37,15 +46,12 @@
 <div class="row">
   <label class="col-lg-6 label">Datos de salud:</label> 
   <div class="col-lg-6 offset-2 offset-md-0">
-      <div>Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
-      <div>Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
-      <div>Calorías: {{sesion?.datosSalud?.[2] ??  ''}}</div>
+      <div class="datos">Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
+      <div class="datos">Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
+      <div class="datos">Calorías: {{sesion?.datosSalud?.[2] ??  ''}}</div>
   </div>
   
 </div>
-
-
-
 
 <div class="row">
   <button class="col-auto btn btn-outline-danger" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>
@@ -54,3 +60,4 @@
 </div>
 
 </div>
+</body>

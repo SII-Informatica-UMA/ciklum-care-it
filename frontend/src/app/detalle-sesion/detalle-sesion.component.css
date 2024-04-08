@@ -4,7 +4,36 @@
     max-width: 100%; 
   }
 
-  .label {
+.label {
     font-weight: bold;
-    color: #1a1a1a;
-  }
+    color: white;
+}
+
+span {
+    color: white;
+}
+
+.row {
+    background-color: #457b9d;
+}
+  
+h1 {
+    font-family: fantasy;
+    text-align: center;
+    background-color: #f79d65;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+}
+  
+body {
+    background-color: #457b9d;
+}
+
+.datos {
+  color: white;
+}
+
+button {
+  background-color: #ffdac6;
+}
