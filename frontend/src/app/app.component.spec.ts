@@ -24,19 +24,19 @@ describe('AppComponent', () => {
     compiled = fixture.nativeElement as HTMLElement;
   });
 
-  it('should create the app', () => {
+  it('debe crear la aplicación', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Sesiones'`, () => {
+  it(`debe tener como título 'Sesiones'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.planElegido).toBeUndefined();
   });
 
-  it('should render title', () => {
+  it('debe renderizar el titulo', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
@@ -47,5 +47,16 @@ describe('AppComponent', () => {
     expect(compiled.querySelectorAll('button')).toHaveSize(3);
   });
 
-  
+  it('debe mostrar el plan con fecha de inicio menor en primer lugar', () => {
+    expect(compiled.querySelector('.list-group button:first-child')?.textContent).toBe('29/3/2024, 8:00:00 - 29/3/2025, 8:00:00');
+  });
+
+  it('debe mostrar el plan con fecha de inicio intermedia en segundo lugar', () => {
+    expect(compiled.querySelector('.list-group button:nth-child(2)')?.textContent).toBe('29/3/2025, 8:00:00 - 29/3/2026, 8:00:00');
+  });
+
+  it('debe mostrar el plan con fecha de inicio final en tercer lugar', () => {
+    expect(compiled.querySelector('.list-group button:nth-child(3)')?.textContent).toBe('29/3/2026, 8:00:00 - 29/3/2027, 8:00:00');
+  });
+
 });
