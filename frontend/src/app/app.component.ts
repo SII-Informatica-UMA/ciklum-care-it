@@ -21,11 +21,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.planes = this.planesService.getPlanes();
+    this.ordenarPlanes(this.planes);
   }
 
   elegirPlan(plan: Plan): void {
     this.planElegido = plan;
     this.sesionesPlan = this.sesionesService.getSesiones(plan.id);
     this.planesService.planCambiado();
+  }
+
+  ordenarPlanes(contactos:Plan[]){
+    this.planes.sort(this.ordenarPorFecha);
+  }
+
+  ordenarPorFecha(a:Plan, b:Plan){
+    if(a.fechaInicio < b.fechaInicio) return -1;
+    if(a.fechaInicio > b.fechaInicio) return 1;
+    return 0;
   }
 }
