@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Usuario} from './usuario';
 import {Centro} from './centro';
 import {Gerente} from './gerente';
+import {Cliente} from './cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,32 @@ export class PlanesService {
 
     });
 
-    this.http.get<Usuario>('http://localhost:8080/usuario/3')
+    /*this.http.get<Usuario>('http://localhost:8080/usuario/3')
+    .subscribe(c => {
+
+    });*/
+
+    /*this.http.get<Cliente[]>('http://localhost:8080/cliente?centro=1')
+    .subscribe(c => {
+
+    });*/
+
+    /*this.http.post<Cliente>('http://localhost:8080/cliente',{telefono: '111',
+    direccion: 'direccion1',
+    dni: '123123',
+    fechaNacimiento: '14032003',
+    sexo: 'HOMBRE'
+    })
+    .subscribe(c => {
+
+    });*/
+
+    /*this.http.get<Gerente[]>('http://localhost:8080/gerente')
+    .subscribe(c => {
+
+    });*/
+
+    this.http.get<Centro>('http://localhost:8080/centro/1')
     .subscribe(c => {
 
     });
@@ -49,22 +75,17 @@ export class PlanesService {
 
     });
 
-    this.http.get<Gerente[]>('http://localhost:8080/gerente')
-    .subscribe(c => {
-
-    });
-
-    this.http.post<Centro>('http://localhost:8080/centro',{nombre: 'centro',
-    direccion: 'direccion'
+    this.http.post<Centro>('http://localhost:8080/centro',{nombre: 'centro1',
+    direccion: 'direccion1'
     })
     .subscribe(c => {
 
     });
 
-    this.http.post<Gerente>('http://localhost:8080/gerente',{idUsuario:1,empresa:'empresa'})
+    /*this.http.post<Gerente>('http://localhost:8080/gerente',{idUsuario:1,empresa:'empresa'})
     .subscribe(contactos => {
 
-    });
+    });*/
     return this.planes;
   }
 
