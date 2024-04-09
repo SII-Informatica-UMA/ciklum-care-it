@@ -29,12 +29,6 @@ export class SesionesService {
 	descripcion: 'Descripción5. La verdad es que no me ha gustado nada este entrenamiento. Me gustaria que dejasen de poner ese tipo de cosas porque me acaba doliendo la espalda.', presencial: true, datosSalud: [], id: 5},
   ];
 
-  private sesiones: Sesion [] = [];
-
-  private sesionCambiadoSource = new Subject<void>();
-
-  sesionCambiado$ = this.sesionCambiadoSource.asObservable();
-
   constructor(private http: HttpClient) {/*
 
     for(let i=0; i<this.sesionesEjemplo.length; i++){
@@ -45,44 +39,25 @@ export class SesionesService {
 
    }
 
-  getSesiones(idPlan: number): Sesion [] {
-
-    this.sesiones=[];
-
-     this.http.get<any[]>('http://localhost:8080/sesion?plan=' + idPlan)
-      .subscribe((res: any[]) => {
-        for (let i = 0; i < res.length; i++) {
-          this.sesiones.push(res[i]);
-          this.ordenarSesiones();
-        }
-      });
-
-      return this.sesiones;
+  getSesiones(idPlan: number): Observable<Sesion[]> {
+     return this.http.get<Sesion[]>('http://localhost:8080/sesion?plan=' + idPlan);
   }
 
-  addSesion(sesion: Sesion, plan_id: number) {
-    sesion.id = Math.max(...this.sesiones.map(c => c.id)) + 1;
-    this.http.post('http://localhost:8080/sesion?plan=' + plan_id, sesion)
-      .subscribe((response: any) => {
-        this.sesiones.push(response); 
-        this.ordenarSesiones();
-      });
+  addSesion(sesion: Sesion, plan_id: number): Observable<Sesion> {
+    return this.http.post<Sesion>('http://localhost:8080/sesion?plan=' + plan_id, sesion);
   }
 
   editarSesion(sesion: Sesion) {
-    let indice = this.sesiones.findIndex(c => c.id == sesion.id);
-    this.sesiones[indice] = sesion;
+    /*let indice = this.sesiones.findIndex(c => c.id == sesion.id);
+    this.sesiones[indice] = sesion;*/
   }
 
-  eliminarSesion(id: number) {
-    let indice = this.sesiones.findIndex(c => c.id == id);
-    this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'}).subscribe((response: any) => {
-      this.sesiones.splice(indice,1); 
-    });;
+  eliminarSesion(id: number): Observable<HttpResponse<string>> {
+    return this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'});
   }
 
-  ordenarSesiones(){
-    this.sesiones.sort(this.ordenarPorFecha);
+  ordenarSesiones(sesiones: Sesion[]){
+    sesiones.sort(this.ordenarPorFecha);
   }
 
   ordenarPorFecha(a:Sesion, b:Sesion){
