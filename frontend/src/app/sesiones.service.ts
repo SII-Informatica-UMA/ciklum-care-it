@@ -3,10 +3,14 @@ import {Sesion } from './sesion';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SesionesService {
+
+  private clienteId = 1;
+
   private sesionesEjemplo: Sesion [] = [
     {idPlan: 2, inicio: '3000-10-29T08:00:00', fin: '2024-10-29T09:00:00', 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
@@ -31,15 +35,36 @@ export class SesionesService {
 
   sesionCambiado$ = this.sesionCambiadoSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {/*
+
+    for(let i=0; i<this.sesionesEjemplo.length; i++){
+      this.http.post('http://localhost:8080/sesion?plan=' + this.sesionesEjemplo[i].idPlan, this.sesionesEjemplo[i])
+        .subscribe(c => {
+      });
+   }*/
+
+   }
 
   getSesiones(idPlan: number): Sesion [] {
-    return this.sesiones.filter(sesion => sesion.idPlan === idPlan);
+
+    this.sesiones=[];
+
+     this.http.get<any[]>('http://localhost:8080/sesion?plan=' + idPlan)
+      .subscribe((res: any[]) => {
+        for (let i = 0; i < res.length; i++) {
+          this.sesiones.push(res[i]);
+        }
+      });
+
+      return this.sesiones;
   }
 
-  addSesion(sesion: Sesion) {
+  addSesion(sesion: Sesion, plan_id: number) {
     sesion.id = Math.max(...this.sesiones.map(c => c.id)) + 1;
-    this.sesiones.push(sesion);
+    this.http.post('http://localhost:8080/sesion?plan=' + plan_id, sesion)
+      .subscribe((response: any) => {
+        this.sesiones.push(response); 
+      });
   }
 
   editarSesion(sesion: Sesion) {

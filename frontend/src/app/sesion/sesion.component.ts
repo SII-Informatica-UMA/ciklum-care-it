@@ -36,7 +36,7 @@ export class SesionComponent implements OnInit {
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.sesion = {idPlan: this.planId, inicio: '', fin: '', trabajoRealizado: '', multimedia: [''], descripcion: '', presencial: false, datosSalud: [''], id: 0};
     ref.result.then((sesion: Sesion) => {
-      this.sesionesService.addSesion(sesion);
+      this.sesionesService.addSesion(sesion, this.planId!);
       this.sesiones = this.sesionesService.getSesiones(this.planId!);
       this.ordenarSesiones(this.sesiones);
     }, (reason) => {});
@@ -47,7 +47,6 @@ export class SesionComponent implements OnInit {
     this.sesionesService.eliminarSesion(id);
     this.sesiones = this.sesionesService.getSesiones(this.planId!);
     this.sesionElegida = undefined;
-    
   }
 
   editarSesion(sesion: Sesion): void {
