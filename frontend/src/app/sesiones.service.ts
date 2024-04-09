@@ -53,6 +53,7 @@ export class SesionesService {
       .subscribe((res: any[]) => {
         for (let i = 0; i < res.length; i++) {
           this.sesiones.push(res[i]);
+          this.ordenarSesiones();
         }
       });
 
@@ -64,6 +65,7 @@ export class SesionesService {
     this.http.post('http://localhost:8080/sesion?plan=' + plan_id, sesion)
       .subscribe((response: any) => {
         this.sesiones.push(response); 
+        this.ordenarSesiones();
       });
   }
 
@@ -77,5 +79,15 @@ export class SesionesService {
     this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'}).subscribe((response: any) => {
       this.sesiones.splice(indice,1); 
     });;
+  }
+
+  ordenarSesiones(){
+    this.sesiones.sort(this.ordenarPorFecha);
+  }
+
+  ordenarPorFecha(a:Sesion, b:Sesion){
+    if(new Date(a.inicio) < new Date(b.inicio)) return -1;
+    if(new Date(a.inicio) > new Date(b.inicio)) return 1;
+    return 0;
   }
 }

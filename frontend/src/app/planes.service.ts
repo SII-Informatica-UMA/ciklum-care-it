@@ -104,14 +104,24 @@ export class PlanesService {
       .subscribe((res: any[]) => {
         for (let i = 0; i < res.length; i++) {
           this.planes.push(...res[i].planes);
+          this.ordenarPlanes();
         }
       });
-
     return this.planes;
   }
 
   planCambiado() {
     this.planCambiadoSource.next();
+  }
+
+  ordenarPlanes(){
+    this.planes.sort(this.ordenarPorFecha);
+  }
+
+  ordenarPorFecha(a:Plan, b:Plan){
+    if(a.fechaInicio < b.fechaInicio) return -1;
+    if(a.fechaInicio > b.fechaInicio) return 1;
+    return 0;
   }
    
 }
