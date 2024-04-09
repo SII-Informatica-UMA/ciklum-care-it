@@ -9,10 +9,13 @@
     background-color: #a3b7ca;
     margin: 10px;
     padding: 10px;
+  border-color: #355c7d;
+  border-width: 4px;
+  border-style: solid;
 }
 
 .text {
-  margin: 12px;
+  margin: 8px;
   font-family: cursive;
   color: white
 }
