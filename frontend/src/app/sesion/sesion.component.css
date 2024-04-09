@@ -1,41 +1,32 @@
 .sesion {
-  background-color: #1d3557;
-  border-color: #457b9d;
-  border-radius: 5px;
-  margin: 15px;
+  border-color: #355c7d;
+    background-color: #355c7d;
+    margin: 5px;
 }
 
 .sesiones {
   text-align: center;
+    background-color: #a3b7ca;
+    margin: 10px;
+    padding: 10px;
 }
 
 .text {
-  margin: 15px;
+  margin: 12px;
+  font-family: cursive;
   color: white
 }
 
 .row {
-  background-color: #457b9d;
+  height: 100%;
+  background-color: #F2E3D5;
 }
 
-h1 {
-  font-family: fantasy;
-  text-align: center;
-  margin: 5px;
-  background-color: #f79d65;
-  border: 0;
-  border-radius: 5px;
-  color: white;
-}
-
-.surrounding {
-  border: 5px;
-  border-radius: 5px;
-  border-color: white;
-}
-
-body {
-  background-color: #457b9d;
+.titulo {
+    font-family: fantasy;
+    font-style: bold;
+    text-align: center;
+    color: #355c7d;
 }
 
 .aniadir {

@@ -7,33 +7,43 @@
 .label {
     font-weight: bold;
     color: white;
+    text-align: left;
 }
 
 span {
     color: white;
 }
 
-.row {
-    background-color: #457b9d;
+.fondo {
+  height: 100%;
+  background-color: #F2E3D5;
 }
   
-h1 {
-    font-family: fantasy;
-    text-align: center;
-    background-color: #f79d65;
-    border: 0;
-    border-radius: 5px;
-    color: white;
-}
-  
-body {
-    background-color: #457b9d;
+.titulo {
+  font-family: fantasy;
+  font-style: bold;
+  text-align: center;
+  color: #355c7d;
 }
 
+.detalles {
+  text-align: center;
+  background-color: #a3b7ca;
+  margin: 10px;
+  padding: 10px;
+}
+
+
 .datos {
-  color: white;
+  margin: 15px;
+    font-family: cursive;
+    color: white
+}
+
+.botones {
+  text-align: center;
 }
 
 button {
-  background-color: #ffdac6;
+  margin: 10px;
 }

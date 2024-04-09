@@ -1,32 +1,30 @@
 .plan {
-    background-color: #026773;
-    border-color: #457b9d;
-    border-radius: 5px;
+    border-color: #355c7d;
+    background-color: #355c7d;
     margin: 5px;
 }
 
 .planes {
     text-align: center;
-    background-color: #3CA6A6;
-    border-radius: 5px;
+    background-color: #a3b7ca;
+    margin: 10px;
+    padding: 10px;
 }
 
 .text {
     margin: 15px;
+    font-family: cursive;
     color: white
 }
 
 .row {
-    background-color: #F2E3D5;
     height: 100%;
+    background-color: #F2E3D5;
 }
 
-h1 {
+.titulo {
     font-family: fantasy;
+    font-style: bold;
     text-align: center;
-    margin: 5px;
-    border: 0;
-    border-radius: 5px;
-    background-color: #012E40;
-    color: #F2E3D5;
+    color: #355c7d;
 }
