@@ -73,6 +73,9 @@ export class SesionesService {
   }
 
   eliminarSesion(id: number) {
-    this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'});
+    let indice = this.sesiones.findIndex(c => c.id == id);
+    this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'}).subscribe((response: any) => {
+      this.sesiones.splice(indice,1); 
+    });;
   }
 }
