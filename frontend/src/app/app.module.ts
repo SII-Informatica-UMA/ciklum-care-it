@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetalleSesionComponent } from './detalle-sesion/detalle-sesion.component';
 import { FormularioSesionComponent } from './formulario-sesion/formulario-sesion.component';
 import { SesionComponent } from './sesion/sesion.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SesionComponent } from './sesion/sesion.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
