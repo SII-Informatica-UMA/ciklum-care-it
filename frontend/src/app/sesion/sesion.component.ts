@@ -30,27 +30,43 @@ export class SesionComponent implements OnInit {
     this.sesionElegida = sesion;
   }
 
+  private actualizaSesiones(id?: number): void {
+    this.sesionesService.getSesiones(this.planId!)      
+    .subscribe((res: Sesion[]) => {
+      this.sesiones = res;
+      this.sesionesService.ordenarSesiones(this.sesiones);
+
+      if (id) {
+        this.sesionElegida = this.sesiones.find(c => c.id == id);
+      }
+    });
+  }
+
   aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.sesion = {idPlan: this.planId, inicio: '', fin: '', trabajoRealizado: '', multimedia: [''], descripcion: '', presencial: false, datosSalud: [''], id: 0};
     ref.result.then((sesion: Sesion) => {
-      this.sesionesService.addSesion(sesion, this.planId!);
-      this.sesiones = this.sesionesService.getSesiones(this.planId!);
-    }, (reason) => {});
+      this.sesionesService.addSesion(sesion, this.planId!)      
+      .subscribe((sesionanadida: Sesion) => {
+        this.actualizaSesiones();
+      });
+    });
 
   }
 
   eliminarSesion(id: number): void {
-    this.sesionesService.eliminarSesion(id);
-    this.sesiones = this.sesionesService.getSesiones(this.planId!);
+    this.sesionesService.eliminarSesion(id)    
+    .subscribe(res => {
+      this.actualizaSesiones();
+    });;
     this.sesionElegida = undefined;
   }
 
   editarSesion(sesion: Sesion): void {
-    this.sesionesService.editarSesion(sesion);
+    /*this.sesionesService.editarSesion(sesion);
     this.sesiones = this.sesionesService.getSesiones(this.planId!);
-	  this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);
+	  this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);*/
   }
 
   

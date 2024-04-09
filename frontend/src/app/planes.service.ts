@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Plan } from './plan';
-import { Subject } from 'rxjs';
+import { Subject,Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
@@ -15,8 +15,6 @@ export class PlanesService {
     {id: 2, idRutina: 2, reglaRecurrencia: "" , fechaInicio: new Date('2025-03-29T08:00:00'), fechaFin: new Date('2026-03-29T08:00:00')},
     {id: 1, idRutina: 1, reglaRecurrencia: "" ,fechaInicio: new Date('2024-03-29T08:00:00'), fechaFin: new Date('2025-03-29T08:00:00')}
   ];
-
-  private planes: Plan [] = [];
 
   private planCambiadoSource = new Subject<void>();
 
@@ -98,24 +96,16 @@ export class PlanesService {
   }*/
 }
 
-  getPlanes(): Plan [] {
-
-    this.http.get<any[]>('http://localhost:8080/entrena?cliente=' + this.clienteId)
-      .subscribe((res: any[]) => {
-        for (let i = 0; i < res.length; i++) {
-          this.planes.push(...res[i].planes);
-          this.ordenarPlanes();
-        }
-      });
-    return this.planes;
+  getPlanes(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/entrena?cliente=' + this.clienteId);
   }
 
   planCambiado() {
     this.planCambiadoSource.next();
   }
 
-  ordenarPlanes(){
-    this.planes.sort(this.ordenarPorFecha);
+  ordenarPlanes(planes: Plan[]){
+    planes.sort(this.ordenarPorFecha);
   }
 
   ordenarPorFecha(a:Plan, b:Plan){
