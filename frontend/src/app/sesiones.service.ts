@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Sesion } from './sesion';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SesionesService {
-  private sesiones: Sesion [] = [
+  private sesionesEjemplo: Sesion [] = [
     {idPlan: 2, inicio: '3000-10-29T08:00:00', fin: '2024-10-29T09:00:00', 
 	trabajoRealizado: 'Trabajo realizado', multimedia: [],
 	descripcion: 'Descripción4', presencial: true, datosSalud: [], id: 4},
@@ -23,7 +25,13 @@ export class SesionesService {
 	descripcion: 'Descripción5. La verdad es que no me ha gustado nada este entrenamiento. Me gustaria que dejasen de poner ese tipo de cosas porque me acaba doliendo la espalda.', presencial: true, datosSalud: [], id: 5},
   ];
 
-  constructor() { }
+  private sesiones: Sesion [] = [];
+
+  private sesionCambiadoSource = new Subject<void>();
+
+  sesionCambiado$ = this.sesionCambiadoSource.asObservable();
+
+  constructor(private http: HttpClient) { }
 
   getSesiones(idPlan: number): Sesion [] {
     return this.sesiones.filter(sesion => sesion.idPlan === idPlan);
@@ -40,7 +48,6 @@ export class SesionesService {
   }
 
   eliminarSesion(id: number) {
-    let indice = this.sesiones.findIndex(c => c.id == id);
-    this.sesiones.splice(indice, 1);
+    this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'});
   }
 }
