@@ -47,7 +47,7 @@ export class SesionComponent implements OnInit {
   aniadirSesion(): void {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.sesion = {idPlan: this.planId, inicio: '', fin: '', trabajoRealizado: '', multimedia: [''], descripcion: '', presencial: false, datosSalud: [''], id: 0};
+    ref.componentInstance.sesion = {idPlan: this.planId, inicio: '', fin: '', trabajoRealizado: '', multimedia: ["",""], descripcion: '', presencial: false, datosSalud: ["","",""], id: 0};
     ref.result.then((sesion: Sesion) => {
       this.sesionesService.addSesion(sesion, this.planId!)      
       .subscribe(res => {

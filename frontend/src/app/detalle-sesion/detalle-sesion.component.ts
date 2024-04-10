@@ -22,8 +22,10 @@ export class DetalleSesionComponent {
     ref.componentInstance.sesion = {...this.sesion};
     ref.componentInstance.sesion.multimedia = {...this.sesion?.multimedia};
     ref.componentInstance.sesion.datosSalud = {...this.sesion?.datosSalud};
-    ref.result.then((sesion: Sesion) => {
-      this.sesionEditada.emit(sesion);
+    ref.result.then((sesionEditada: Sesion) => {
+      sesionEditada.multimedia = [sesionEditada.multimedia[0],sesionEditada.multimedia[1]];
+      sesionEditada.datosSalud = [sesionEditada.datosSalud[0],sesionEditada.datosSalud[1],sesionEditada.datosSalud[2]];
+      this.sesionEditada.emit(sesionEditada);
     }, (reason) => {});
   }
 
