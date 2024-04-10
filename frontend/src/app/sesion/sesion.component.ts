@@ -28,8 +28,6 @@ export class SesionComponent implements OnInit {
 
   elegirSesion(sesion: Sesion): void {
     this.sesionElegida = sesion;
-    this.sesionElegida.inicio = this.sesionElegida.inicio?.slice(0,16);
-    this.sesionElegida.fin = this.sesionElegida.fin?.slice(0,16);
   }
 
   private actualizaSesiones(id?: number): void {
