@@ -32,3 +32,15 @@
     text-align: center;
     color: #355c7d;
 }
+
+.active{
+    cursor: default;
+    background-color: #a3b7ca;
+  }
+
+.active .text{
+    cursor: default;
+    color: #355c7d !important;
+    font-family: cursive;
+    font-style: bold !important;
+}

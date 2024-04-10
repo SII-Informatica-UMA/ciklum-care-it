@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de sesiones</title>
-    <link href="sesion.component.css" rel="stylesheet">
-</head>
-<body>
   <div class="row vh-100 m-0">
     <div class="col-md-5 rounded">
       <div class="sesiones rounded">
@@ -14,7 +5,7 @@
         <h1 class="rounded">Sesiones</h1>
       </div>
         <div *ngFor="let sesion of sesiones">
-            <button class="sesion rounded"
+            <button class="sesion rounded active"
                 (click)="elegirSesion(sesion)"
                 [class.active]="sesion === sesionElegida"><div class="text">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}} - {{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</div>
               </button>
@@ -37,4 +28,3 @@
      
     </div>
   </div>
-</body>

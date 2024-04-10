@@ -36,3 +36,14 @@
   text-align: center;
   color: white
 }
+
+.active{
+  cursor: default;
+  background-color: #a3b7ca;
+}
+
+.active .text{
+  cursor: default;
+  color: #355c7d !important;
+  font-family: cursive;
+}
