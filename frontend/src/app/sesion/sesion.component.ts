@@ -28,8 +28,8 @@ export class SesionComponent implements OnInit {
 
   elegirSesion(sesion: Sesion): void {
     this.sesionElegida = sesion;
-    this.sesionElegida.inicio = this.sesionElegida.inicio.slice(0,16);
-    this.sesionElegida.fin = this.sesionElegida.fin.slice(0,16);
+    this.sesionElegida.inicio = this.sesionElegida.inicio?.slice(0,16);
+    this.sesionElegida.fin = this.sesionElegida.fin?.slice(0,16);
   }
 
   private actualizaSesiones(id?: number): void {
@@ -65,11 +65,18 @@ export class SesionComponent implements OnInit {
     this.sesionElegida = undefined;
   }
 
+ 
+
   editarSesion(sesion: Sesion): void {
-    /*this.sesionesService.editarSesion(sesion);
+     /*this.sesionesService.editarSesion(sesion);
     this.sesiones = this.sesionesService.getSesiones(this.planId!);
 	  this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);*/
-  }
+    this.sesionesService.editarSesion(sesion)
+    .subscribe(res => {
+      this.actualizaSesiones(sesion.id)
+    });
+   
+  }
 
   
 }

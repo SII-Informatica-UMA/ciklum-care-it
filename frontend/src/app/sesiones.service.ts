@@ -47,9 +47,10 @@ export class SesionesService {
     return this.http.post<Sesion>('http://localhost:8080/sesion?plan=' + plan_id, sesion);
   }
 
-  editarSesion(sesion: Sesion) {
+  editarSesion(sesion: Sesion): Observable<Sesion> {
     /*let indice = this.sesiones.findIndex(c => c.id == sesion.id);
     this.sesiones[indice] = sesion;*/
+    return this.http.put<Sesion>('http://localhost:8080/sesion/' + sesion.id, sesion);
   }
 
   eliminarSesion(id: number): Observable<HttpResponse<string>> {
