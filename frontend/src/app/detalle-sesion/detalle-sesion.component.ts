@@ -22,13 +22,14 @@ export class DetalleSesionComponent {
     ref.componentInstance.sesion = {...this.sesion};
     ref.componentInstance.sesion.multimedia = [...this.sesion!.multimedia];
     ref.componentInstance.sesion.datosSalud = [...this.sesion!.datosSalud];
-    ref.componentInstance.sesion.inicio = this.convertirFechaHora(ref.componentInstance.sesion.inicio);
-    ref.componentInstance.sesion.fin = this.convertirFechaHora(ref.componentInstance.sesion.fin);
+    if(ref.componentInstance.sesion.inicio) ref.componentInstance.sesion.inicio = this.convertirFechaHora(ref.componentInstance.sesion.inicio);
+    if(ref.componentInstance.sesion.fin) ref.componentInstance.sesion.fin = this.convertirFechaHora(ref.componentInstance.sesion.fin);
     ref.result.then((sesionEditada: Sesion) => {
-      sesionEditada.inicio = new Date(sesionEditada.inicio).toISOString();
-      sesionEditada.fin = new Date(sesionEditada.fin).toISOString();
-      this.sesionEditada.emit(sesionEditada);
-    }, (reason) => {});
+      let sesion ={...sesionEditada}; //Para evitar warnings al modificar las fechas
+      if(sesion.inicio) sesion.inicio = new Date(sesion.inicio).toISOString();
+      if(sesion.fin) sesion.fin = new Date(sesion.fin).toISOString();
+      this.sesionEditada.emit(sesion);
+    }, (reason) => {}); 
   }
 
   eliminarSesion(): void {

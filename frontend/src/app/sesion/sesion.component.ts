@@ -46,7 +46,10 @@ export class SesionComponent implements OnInit {
     let ref = this.modalService.open(FormularioSesionComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.sesion = {idPlan: this.planId, inicio: '', fin: '', trabajoRealizado: '', multimedia: ["",""], descripcion: '', presencial: false, datosSalud: ["","",""], id: 0};
-    ref.result.then((sesion: Sesion) => {
+    ref.result.then((sesionAnadida: Sesion) => {
+      let sesion = {...sesionAnadida};//Para evitar warnings al modificar las fechas
+      if(sesion.inicio) sesion.inicio = new Date(sesion.inicio).toISOString();
+      if(sesion.fin) sesion.fin = new Date(sesion.fin).toISOString();
       this.sesionesService.addSesion(sesion, this.planId!)      
       .subscribe(res => {
         this.actualizaSesiones();
