@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SesionComponent } from './sesion.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SesionComponent', () => {
   let component: SesionComponent;
@@ -10,7 +11,7 @@ describe('SesionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SesionComponent],
-      imports: [FormsModule],
+      imports: [FormsModule,HttpClientModule],
       providers: [NgbActiveModal]
     })
     .compileComponents();
