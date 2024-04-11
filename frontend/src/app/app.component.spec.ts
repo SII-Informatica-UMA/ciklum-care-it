@@ -24,6 +24,11 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    component.planes = [
+      { id: 3, idRutina: 3, reglaRecurrencia: '', fechaInicio: new Date('2025-03-29T08:00:00'), fechaFin: new Date('2026-03-29T08:00:00') },
+      { id: 2, idRutina: 2, reglaRecurrencia: '', fechaInicio: new Date('2024-03-29T08:00:00'), fechaFin: new Date('2025-03-29T08:00:00') },
+      { id: 1, idRutina: 1, reglaRecurrencia: '', fechaInicio: new Date('2026-03-29T08:00:00'), fechaFin: new Date('2027-03-29T08:00:00') }
+    ];
     fixture.detectChanges();
     compiled = fixture.nativeElement as HTMLElement;
   });
@@ -40,45 +45,29 @@ describe('AppComponent', () => {
     expect(app.planElegido).toBeUndefined();
   });
 
-  it('debe renderizar el titulo', () => {
+  it('debe renderizar el titulo correcto', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.container h1')?.textContent).toContain('Lista de planes');
+    expect(compiled.querySelector('.rounded h1')?.textContent).toContain('Planes');
   });
 
-  it('debe seleccionar un plan', () => {
-    const plan: Plan = { id: 1, idRutina: 1, reglaRecurrencia: '', fechaInicio: new Date(), fechaFin: new Date() };
-    component.elegirPlan(plan);
-    expect(component.planElegido).toEqual(plan);
+  it('debe seleccionar un plan si es elegido', () => {
+    component.elegirPlan(component.planes[0]);
+    expect(component.planElegido).toEqual(component.planes[0]);
   });
 
   it('debe ordenar por fecha', () => {
-    const planes: Plan[] = [
-      { id: 3, idRutina: 3, reglaRecurrencia: '', fechaInicio: new Date('2025-03-29T08:00:00'), fechaFin: new Date('2026-03-29T08:00:00') },
-      { id: 2, idRutina: 2, reglaRecurrencia: '', fechaInicio: new Date('2024-03-29T08:00:00'), fechaFin: new Date('2025-03-29T08:00:00') },
-      { id: 1, idRutina: 1, reglaRecurrencia: '', fechaInicio: new Date('2026-03-29T08:00:00'), fechaFin: new Date('2027-03-29T08:00:00') }
-    ];
-
     const planesService = TestBed.inject(PlanesService);
-    planesService.ordenarPlanes(planes);
+    planesService.ordenarPlanes(component.planes);
 
-    expect(planes[0].id).toBe(2);
-    expect(planes[1].id).toBe(3);
-    expect(planes[2].id).toBe(1);
+    expect(component.planes[0].id).toBe(2);
+    expect(component.planes[1].id).toBe(3);
+    expect(component.planes[2].id).toBe(1);
   });
 
   it('debe haber tantos botones como planes', () => {
-    const planes: Plan[] = [
-      { id: 1, idRutina: 1, reglaRecurrencia: '', fechaInicio: new Date(), fechaFin: new Date() },
-      { id: 2, idRutina: 2, reglaRecurrencia: '', fechaInicio: new Date(), fechaFin: new Date() },
-      { id: 3, idRutina: 3, reglaRecurrencia: '', fechaInicio: new Date(), fechaFin: new Date() }
-    ];
-    component.planes = planes;
-  
-    fixture.detectChanges();
     const botones = compiled.querySelectorAll('button');
-    expect(botones.length).toEqual(planes.length);
+    expect(botones.length).toEqual(component.planes.length);
   });
-
 });
