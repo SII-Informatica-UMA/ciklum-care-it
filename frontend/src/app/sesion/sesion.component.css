@@ -47,3 +47,10 @@
   color: #355c7d !important;
   font-family: cursive;
 }
+
+.sesion:hover{
+  transform: none !important;
+  background-color: #a3b7ca !important;
+  color: #355c7d !important;
+  box-shadow: none !important;
+}
