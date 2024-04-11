@@ -1,17 +1,56 @@
-/* Animación para el "hola" */
-@keyframes holaSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(50%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Estilo para el "hola" */
-  .hola-animation {
-    animation: holaSlideIn 0.5s ease-in-out;
-  }
-  
+.sesion {
+  border-color: #355c7d;
+    background-color: #355c7d;
+    margin: 5px;
+}
+
+.sesiones {
+  text-align: center;
+    background-color: #a3b7ca;
+    margin: 10px;
+    padding: 10px;
+  border-color: #355c7d;
+  border-width: 4px;
+  border-style: solid;
+}
+
+.text {
+  margin: 8px;
+  font-family: cursive;
+  color: white
+}
+
+.row {
+  height: 100%;
+
+}
+
+.titulo {
+    font-family: fantasy;
+    font-style: bold;
+    text-align: center;
+    color: #355c7d;
+}
+
+.aniadir {
+  text-align: center;
+  color: white
+}
+
+.active{
+  cursor: default;
+  background-color: #a3b7ca;
+}
+
+.active .text{
+  cursor: default;
+  color: #355c7d !important;
+  font-family: cursive;
+}
+
+.sesion:hover{
+  transform: none !important;
+  background-color: #a3b7ca !important;
+  color: #355c7d !important;
+  box-shadow: none !important;
+}

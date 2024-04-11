@@ -1,20 +1,26 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mt-3">
-      <h2>Lista de sesiones</h2>
-      <div class="list-group">
-        <button *ngFor="let sesion of sesiones"
-                class="list-group-item list-group-item-action"
-                (click)="elegirSesion(sesion)"
-                [class.active]="sesion === sesionElegida">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}} - {{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</button>
+  <div class="row vh-100 m-0">
+    <div class="col-md-5 rounded">
+      <div class="sesiones rounded">
+      <div class="titulo rounded">
+        <h1 class="rounded">Sesiones</h1>
       </div>
+        <div *ngFor="let sesion of sesiones">
+            <button class="sesion rounded active"
+                (click)="elegirSesion(sesion)"
+                [class.active]="sesion === sesionElegida"><div class="text">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}} - {{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</div>
+              </button>
+        </div>
       
       <br>
-      <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="aniadirSesion()"></button>
+      <div class="aniadir">
+        <button type="button" class="btn btn-outline-light bi bi-plus-lg" (click)="aniadirSesion()"></button>
+      </div>
     </div>
+  </div>
     
     <!-- Detalles de sesión -->
-    <div class="col-md-6" *ngIf="sesionElegida">
+    
+    <div class="col-md-7" *ngIf="sesionElegida">
         <app-detalle-sesion [sesion]="sesionElegida"
           (sesionEditada)="editarSesion($event)"
           (sesionEliminada)="eliminarSesion($event)"
@@ -22,4 +28,3 @@
      
     </div>
   </div>
-</div>

@@ -1,0 +1,52 @@
+.plan {
+    border-color: #355c7d;
+    background-color: #355c7d;
+    margin: 5px;
+}
+
+.planes {
+    text-align: center;
+    background-color: #a3b7ca;
+    margin: 10px;
+    padding: 10px;
+    border-color: #355c7d;
+    border-width: 4px;
+    border-style: solid;
+}
+
+
+.text {
+    margin: 15px;
+    font-family: cursive;
+    color: white
+}
+
+.row {
+    height: 100%;
+
+}
+
+.titulo {
+    font-family: fantasy;
+    font-style: bold;
+    text-align: center;
+    color: #355c7d;
+}
+
+.active{
+    cursor: default;
+    background-color: #a3b7ca;
+  }
+
+.active .text{
+    cursor: default;
+    color: #355c7d !important;
+    font-family: cursive;
+}
+
+.plan:hover{
+    transform: none !important;
+    background-color: #a3b7ca !important;
+    color: #355c7d !important;
+    box-shadow: none !important;
+  }

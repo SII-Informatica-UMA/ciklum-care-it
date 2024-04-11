@@ -1,10 +1,61 @@
 .text {
-    word-wrap: break-word; /* partirse en palabras si supera el ancho del contenedor */
-    overflow-wrap: break-word; /* lo mismo para navegadores más antiguos */
-    max-width: 100%; 
-  }
+  word-wrap: break-word; /* partirse en palabras si supera el ancho del contenedor */
+  overflow-wrap: break-word; /* lo mismo para navegadores más antiguos */
+  max-width: 100%; 
+}
 
-  .label {
-    font-weight: bold;
-    color: #1a1a1a;
-  }
+.label {
+  font-weight: bold;
+  color: white;
+  text-align: left;
+  font-family: cursive;
+  padding-left: 45px;
+}
+
+
+span {
+    color: white;
+    text-align: left;
+    font-family: cursive;
+}
+
+.check {
+  text-align: left;
+}
+
+.fondo {
+  height: 100%;
+}
+  
+.titulo {
+  font-family: fantasy;
+  font-style: bold;
+  text-align: center;
+  color: #355c7d;
+}
+
+.detalles {
+  text-align: center;
+  background-color: #a3b7ca;
+  margin: 10px;
+  padding: 10px;
+  border-color: #355c7d;
+  border-width: 4px;
+  border-style: solid;
+}
+
+.datos {
+    text-align: left;
+    font-family: cursive;
+    color: white
+}
+
+.botones {
+  margin-left: 20px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+button {
+  margin-left: 15px;
+}

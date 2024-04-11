@@ -4,9 +4,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 describe('SesionComponent', () => {
   let component: SesionComponent;
   let fixture: ComponentFixture<SesionComponent>;
+  let compiled: HTMLElement;
+  let eddd=0
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

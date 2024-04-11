@@ -1,56 +1,55 @@
-<div class="container">
-  <div class="row mt-2">
-    <h4 >Detalles de {{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</h4>
-  </div>
 
-
-<div class="row">
-  <label class="col-lg-6 label">Fecha de inicio:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Fecha de fin:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Trabajo realizado:</label>
-  <span class="col-lg-6 offset-2 offset-md-0 text">{{sesion?.trabajoRealizado}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Vídeo:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[0] ?? ''}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Foto:</label>
-  <span class="col-lg-6 offset-2 offset-md-0">{{sesion?.multimedia?.[1] ?? ''}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Descripción:</label>
-  <span class="col-lg-6 offset-2 offset-md-0 text">{{sesion?.descripcion}}</span>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Presencial:</label>
-  <div class="col-lg-6 offset-2 offset-md-0">
-    <input type="checkbox" [ngModel]="sesion?.presencial" disabled>
+  <div class="row vh-100 m-0 fondo">
+   <div class="detalles rounded">
+    <div class="row titulo">
+      <h1 >Detalles de {{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</h1>
+    </div>
+  
+  
+  <div class="row">
+    <label class="col-lg-4 label">Fecha de inicio:</label>
+    <span class="col-lg-8 offset-2 offset-md-0">{{sesion?.inicio | date:'dd/MM/yyyy HH:mm'}}</span>
   </div>
-</div>
-<div class="row">
-  <label class="col-lg-6 label">Datos de salud:</label> 
-  <div class="col-lg-6 offset-2 offset-md-0">
-      <div>Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
-      <div>Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
-      <div>Calorías: {{sesion?.datosSalud?.[2] ??  ''}}</div>
+  <div class="row">
+    <label class="col-lg-4 label">Fecha de fin:</label>
+    <span class="col-lg-8 offset-2 offset-md-0">{{sesion?.fin | date:'dd/MM/yyyy HH:mm'}}</span>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Trabajo realizado:</label>
+    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.trabajoRealizado}}</span>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Vídeo:</label>
+    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.multimedia?.[0] ?? ''}}</span>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Foto:</label>
+    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.multimedia?.[1] ?? ''}}</span>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Descripción:</label>
+    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.descripcion}}</span>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Presencial:</label>
+    <div class="col-lg-8 offset-2 offset-md-0 check">
+      <input type="checkbox" [ngModel]="sesion?.presencial" disabled>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-lg-4 label">Datos de salud:</label> 
+    <div class="col-lg-8 offset-2 offset-md-0">
+        <div class="datos text">Pulsaciones: {{sesion?.datosSalud?.[0] ?? '' }}</div>
+        <div class="datos text">Peso: {{sesion?.datosSalud?.[1] ?? '' }}</div>
+        <div class="datos">Calorías: {{sesion?.datosSalud?.[2] ??  ''}}</div>
+    </div>
+    
   </div>
   
-</div>
-
-
-
-
-<div class="row">
-  <button class="col-auto btn btn-outline-danger" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>
-  <div class="col-1"></div>
-  <button class="col-auto btn btn-outline-primary" (click)="editarSesion()">Editar <i class="bi bi-pencil-fill"></i></button>
-</div>
-
+  <div class="botones">
+    <button class="col-auto btn btn-outline-danger" (click)="eliminarSesion()">Eliminar <i class="bi bi-trash-fill"></i></button>
+    <button class="col-auto btn btn-outline-primary" (click)="editarSesion()">Editar <i class="bi bi-pencil-fill"></i></button>
+  </div>
+  
+  </div>
 </div>
