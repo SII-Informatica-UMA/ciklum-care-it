@@ -52,7 +52,7 @@ export class SesionComponent implements OnInit {
       if(sesion.fin) sesion.fin = new Date(sesion.fin).toISOString();
       this.sesionesService.addSesion(sesion, this.planId!)      
       .subscribe(res => {
-        this.actualizaSesiones();
+        this.actualizaSesiones(this.sesionElegida?.id);
       });
     });
 
@@ -69,9 +69,6 @@ export class SesionComponent implements OnInit {
  
 
   editarSesion(sesion: Sesion): void {
-     /*this.sesionesService.editarSesion(sesion);
-    this.sesiones = this.sesionesService.getSesiones(this.planId!);
-	  this.sesionElegida = this.sesiones.find(c => c.id == sesion.id);*/
     this.sesionesService.editarSesion(sesion)
     .subscribe(res => {
       this.actualizaSesiones(sesion.id)

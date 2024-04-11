@@ -20,11 +20,11 @@
   </div>
   <div class="row">
     <label class="col-lg-4 label">Vídeo:</label>
-    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.multimedia?.[0] ?? ''}}</span>
+    <a class="col-lg-8 offset-2 offset-md-0 text" href="{{sesion?.multimedia?.[0] ?? ''}}">{{sesion?.multimedia?.[0] ?? ''}}</a>
   </div>
   <div class="row">
     <label class="col-lg-4 label">Foto:</label>
-    <span class="col-lg-8 offset-2 offset-md-0 text">{{sesion?.multimedia?.[1] ?? ''}}</span>
+    <a class="col-lg-6 offset-2 offset-md-0" href="{{sesion?.multimedia?.[1] ?? ''}}">{{sesion?.multimedia?.[1] ?? ''}}</a>
   </div>
   <div class="row">
     <label class="col-lg-4 label">Descripción:</label>

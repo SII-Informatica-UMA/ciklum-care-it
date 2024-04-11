@@ -19,6 +19,12 @@ span {
     font-family: cursive;
 }
 
+a {
+  color: white;
+  text-align: left;
+  font-family: cursive;
+}
+
 .check {
   text-align: left;
 }
