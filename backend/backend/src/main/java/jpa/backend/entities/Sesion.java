@@ -1,4 +1,4 @@
-package jpa.backend;
+package jpa.backend.entities;
 
 import java.util.Objects;
 import jakarta.persistence.*;
