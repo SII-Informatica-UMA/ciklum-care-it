@@ -81,11 +81,11 @@ public class Sesion {
         this.trabajoRealizado = trabajoRealizado;
     }
 
-    public String[] getMultimedia() {
+    public List<String> getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(String[] multimedia) {
+    public void setMultimedia(List<String> multimedia) {
         this.multimedia = multimedia;
     }
 
@@ -105,11 +105,11 @@ public class Sesion {
         this.presencial = presencial;
     }
 
-    public String[] getDatosSalud() {
+    public List<String> getDatosSalud() {
         return datosSalud;
     }
 
-    public void setDatosSalud(String[] datosSalud) {
+    public void setDatosSalud(List<String> datosSalud) {
         this.datosSalud = datosSalud;
     }
 
