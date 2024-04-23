@@ -1,7 +1,5 @@
 package jpa.backend;
 
-import java.io.File;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +23,7 @@ public class LineaComandos implements CommandLineRunner {
 		}
 
 		if (args.length > 0) {
-			for (Sesion s: repository.findByInicio(args[0])) {
+			for (Sesion s: repository.findById(args[0])) {
 				System.out.println(s);
 			}
 		}
