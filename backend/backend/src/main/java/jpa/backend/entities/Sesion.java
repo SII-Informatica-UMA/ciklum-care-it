@@ -14,9 +14,8 @@ public class Sesion {
     private String fin;
     private String trabajoRealizado;
 
-    @ElementCollection
-    @CollectionTable(name="multimedia")
-    private List<String> multimedia = new ArrayList<>();
+    @Embedded
+    private Multimedia multimedia;
 
     private String descripcion;
     private Boolean presencial;
@@ -81,11 +80,11 @@ public class Sesion {
         this.trabajoRealizado = trabajoRealizado;
     }
 
-    public List<String> getMultimedia() {
+    public Multimedia getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(List<String> multimedia) {
+    public void setMultimedia(Multimedia multimedia) {
         this.multimedia = multimedia;
     }
 
