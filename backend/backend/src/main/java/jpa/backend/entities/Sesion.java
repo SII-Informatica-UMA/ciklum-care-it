@@ -15,8 +15,6 @@ public class Sesion {
     private String descripcion;
     private Boolean presencial;
     private String[] datosSalud;
-
-    @ManyToOne
     private Long idPlan;
 
 
