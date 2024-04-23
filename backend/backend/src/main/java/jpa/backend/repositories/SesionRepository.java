@@ -9,7 +9,6 @@ import jpa.backend.entities.Sesion;
 
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
 
-	Optional<Sesion> findById(Long id);
-	List<Sesion> findByIdPlan(Long idPlan);
+	List<Sesion> findByInicio(String inicio);
 
 }
