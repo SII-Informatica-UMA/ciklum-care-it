@@ -33,7 +33,7 @@ public class Sesion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sesion sesion = (Sesion) o;
-        return Objects.equals(id, sesion.id) && Objects.equals(idPlan, sesion.idPlan);
+        return id == sesion.id && idPlan == sesion.idPlan;
     }
 
     @Override

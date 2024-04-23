@@ -1,14 +1,15 @@
-package es.uma.informatica.sii.spring.jpa.demo.repositories;
+package jpa.backend.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
+import jpa.backend.entities.Sesion;
 
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
-	Sesion findById(Long id);
+	Optional<Sesion> findById(Long id);
 
 }
