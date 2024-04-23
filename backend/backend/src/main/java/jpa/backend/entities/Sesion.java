@@ -1,5 +1,7 @@
 package jpa.backend.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import jakarta.persistence.*;
 
@@ -11,10 +13,18 @@ public class Sesion {
     private String inicio;
     private String fin;
     private String trabajoRealizado;
-    private String[] multimedia;
+
+    @ElementCollection
+    @CollectionTable(name="multimedia")
+    private List<String> multimedia = new ArrayList<>();
+
     private String descripcion;
     private Boolean presencial;
-    private String[] datosSalud;
+
+    @ElementCollection
+    @CollectionTable(name="datosSalud")
+    private List<String> datosSalud = new ArrayList<>();
+
     private Long idPlan;
 
 
