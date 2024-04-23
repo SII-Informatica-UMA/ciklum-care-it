@@ -23,7 +23,7 @@ public class LineaComandos implements CommandLineRunner {
 		}
 
 		if (args.length > 0) {
-			for (Sesion s: repository.findById(args[0])) {
+			for (Sesion s: repository.findByInicio(args[0])) {
 				System.out.println(s);
 			}
 		}
