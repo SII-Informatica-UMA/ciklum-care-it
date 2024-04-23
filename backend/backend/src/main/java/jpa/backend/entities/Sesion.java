@@ -20,9 +20,8 @@ public class Sesion {
     private String descripcion;
     private Boolean presencial;
 
-    @ElementCollection
-    @CollectionTable(name="datosSalud")
-    private List<String> datosSalud = new ArrayList<>();
+    @Embedded
+    private DatosSalud datosSalud;
 
     private Long idPlan;
 
@@ -104,11 +103,11 @@ public class Sesion {
         this.presencial = presencial;
     }
 
-    public List<String> getDatosSalud() {
+    public DatosSalud getDatosSalud() {
         return datosSalud;
     }
 
-    public void setDatosSalud(List<String> datosSalud) {
+    public void setDatosSalud(DatosSalud datosSalud) {
         this.datosSalud = datosSalud;
     }
 
