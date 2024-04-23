@@ -104,4 +104,9 @@ public class Sesion {
     public void setDatosSalud(String[] datosSalud) {
         this.datosSalud = datosSalud;
     }
+
+    @Override
+    public String toString(){
+        return "idPlan: "+idPlan+"; id: "+id;
+    }
 }
