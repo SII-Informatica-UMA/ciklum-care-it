@@ -10,5 +10,6 @@ import es.uma.informatica.sii.spring.jpa.demo.entities.Sesion;
 
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
 	Sesion findById(Long id);
+	List<Sesion> findByIdPlan(Long idPlan);
 
 }
