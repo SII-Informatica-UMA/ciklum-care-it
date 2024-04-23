@@ -1,7 +1,5 @@
 package jpa.backend;
 
-import java.io.File;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +18,15 @@ public class LineaComandos implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 
-		File ficheroInstrucciones = new File("jpa/backend/script.sh");
-		ficheroInstrucciones.canWrite();
-		ficheroInstrucciones.
+		for (String s: args) {
+			System.out.println(s);
+		}
+
+		if (args.length > 0) {
+			for (Sesion s: repository.findById(args[0])) {
+				System.out.println(s);
+			}
+		}
 	}
 
 }
