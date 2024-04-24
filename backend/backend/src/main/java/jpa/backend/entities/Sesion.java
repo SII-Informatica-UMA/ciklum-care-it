@@ -31,7 +31,7 @@ public class Sesion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sesion sesion = (Sesion) o;
-        return id == sesion.id && idPlan == sesion.idPlan;
+        return this.id == sesion.id;
     }
 
     @Override
@@ -113,6 +113,7 @@ public class Sesion {
 
     @Override
     public String toString(){
-        return "idPlan: "+idPlan+"; id: "+id;
+        return "{id: "+id+", inicio: "+inicio+", fin: "+fin+", trabajoRealizado: "+trabajoRealizado+", multimedia: "+multimedia.toString()
+        +", descripcion: "+descripcion+", presencial: "+presencial+", datos de salud: "+datosSalud.toString()+"}";
     }
 }

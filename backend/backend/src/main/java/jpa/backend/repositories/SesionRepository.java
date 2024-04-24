@@ -9,5 +9,5 @@ import jpa.backend.entities.Sesion;
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
 
 	List<Sesion> findByInicio(String inicio);
-
+	List<Sesion> findByIdPlan(Long idPlan);
 }

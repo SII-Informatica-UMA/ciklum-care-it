@@ -7,19 +7,19 @@ public class Multimedia {
     private String video;
 
 
-    private String getImagen(){
+    public String getImagen(){
         return this.imagen;
     }
 
-    private void setImagen(String img){
+    public void setImagen(String img){
         this.imagen = img;
     }
 
-    private String getVideo(){
+    public String getVideo(){
         return this.video;
     }
 
-    private void setVideo(String vid){
+    public void setVideo(String vid){
         this.video = vid;
     }
 
@@ -52,5 +52,10 @@ public class Multimedia {
         } else if (!video.equals(other.video))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "{imagen=" + this.imagen + ", video=" + this.video+'}';
     }
 }
