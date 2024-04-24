@@ -3,7 +3,9 @@ import jakarta.persistence.*;
 
 @Embeddable
 public class Multimedia {
+    @Column(length = 2048)
     private String imagen;
+    @Column(length = 2048)
     private String video;
 
 

@@ -10,13 +10,18 @@ public class Sesion {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 50)
     private String inicio;
+    @Column(length = 50)
     private String fin;
+
+    @Column(length = 4000)
     private String trabajoRealizado;
 
     @Embedded
     private Multimedia multimedia;
 
+    @Column(length = 4000)
     private String descripcion;
     private Boolean presencial;
 
