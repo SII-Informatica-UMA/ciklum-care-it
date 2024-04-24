@@ -35,7 +35,7 @@ public class DatosSalud {
 
     @Override
     public String toString() {
-        return "DatosSalud{" + "pulsaciones=" + pulsaciones + ", peso=" + peso + ", calorias=" + calorias + '}';
+        return "{pulsaciones=" + pulsaciones + ", peso=" + peso + ", calorias=" + calorias + '}';
     }
 
     @Override
