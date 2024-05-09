@@ -1,4 +1,4 @@
-package jpa.backend.entities;
+package sesiones.backend.entities;
 
 import jakarta.persistence.Embeddable;
 

@@ -1,11 +1,11 @@
-package jpa.backend;
+package sesiones.backend;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import jpa.backend.entities.Sesion;
-import jpa.backend.repositories.SesionRepository;
+import sesiones.backend.entities.Sesion;
+import sesiones.backend.repositories.SesionRepository;
 
 @Component
 public class LineaComandos implements CommandLineRunner {

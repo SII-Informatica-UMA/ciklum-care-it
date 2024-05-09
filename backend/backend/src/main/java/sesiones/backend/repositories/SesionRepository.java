@@ -1,10 +1,10 @@
-package jpa.backend.repositories;
+package sesiones.backend.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import jpa.backend.entities.Sesion;
+import sesiones.backend.entities.Sesion;
 
 public interface SesionRepository extends JpaRepository<Sesion, Long> {
 
