@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Builder
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Sesion {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
