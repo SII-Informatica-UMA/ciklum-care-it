@@ -1,7 +1,10 @@
 package sesiones.backend.entities;
 
 import jakarta.persistence.Embeddable;
-
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class DatosSalud {
     private Long pulsaciones;

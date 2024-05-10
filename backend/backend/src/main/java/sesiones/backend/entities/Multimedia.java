@@ -1,6 +1,10 @@
 package sesiones.backend.entities;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class Multimedia {
     @Column(length = 2048)

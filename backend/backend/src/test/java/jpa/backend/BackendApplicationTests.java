@@ -1,6 +1,10 @@
 package jpa.backend;
 
+import sesiones.backend.controllers.Mapper;
 import sesiones.backend.dtos.SesionDTO;
+import sesiones.backend.dtos.SesionNuevaDTO;
+import sesiones.backend.entities.DatosSalud;
+import sesiones.backend.entities.Multimedia;
 import sesiones.backend.entities.Sesion;
 import sesiones.backend.repositories.SesionRepository;
 
@@ -85,6 +89,18 @@ class BackendApplicationTests {
         return peticion;
     }
 
+    private void compruebaCampos(Sesion expected, Sesion actual) {	
+		assertThat(actual.getInicio()).isEqualTo(expected.getInicio());
+		assertThat(actual.getFin()).isEqualTo(expected.getFin());
+		assertThat(actual.getTrabajoRealizado()).isEqualTo(expected.getTrabajoRealizado());
+        assertThat(actual.getMultimedia()).isEqualTo(expected.getMultimedia());
+        assertThat(actual.getDescripcion()).isEqualTo(expected.getDescripcion());
+        assertThat(actual.getPresencial()).isEqualTo(expected.getPresencial());
+        assertThat(actual.getDatosSalud()).isEqualTo(expected.getDatosSalud());
+        assertThat(actual.getIdPlan()).isEqualTo(expected.getIdPlan());
+	}
+
+
 	@Nested
     @DisplayName("cuando la BD esta vacia")
     public class BDVacia {
@@ -113,7 +129,44 @@ class BackendApplicationTests {
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
 		}
+
+        
+		/**@Test
+		@DisplayName("inserta correctamente un sesion")
+		public void insertasesion() {
+
+			// Preparamos el sesion a insertar
+			var sesionNuevaDTO = SesionNuevaDTO.builder()
+                    .inicio("")
+                    .fin("")
+                    .trabajoRealizado("3 sentadillas")
+                    .multimedia(new Multimedia("imagen", "video"))
+                    .descripcion("todo muy bien")
+                    .presencial(false)
+                    .datosSalud(new DatosSalud(25L,32L, 43L))
+                    .idPlan(1L)
+					.build();
+            
+            
+			// Preparamos la petición con el sesion dentro
+			var peticion = post("http", "localhost",port, "/sesiones", sesionNuevaDTO);
+
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
+			assertThat(respuesta.getHeaders().get("Location").get(0))
+			.startsWith("http://localhost:"+port+"/sesiones");
+
+			List<Sesion> sesionesBD = sesionRepository.findAll();
+			assertThat(sesionesBD).hasSize(1);
+			assertThat(respuesta.getHeaders().get("Location").get(0))
+			.endsWith("/"+sesionesBD.get(0).getId());
+			compruebaCampos(Mapper.toSesion(sesionNuevaDTO), sesionesBD.get(0));
+		}*/
 	}
+    
 
 
 	@Nested
