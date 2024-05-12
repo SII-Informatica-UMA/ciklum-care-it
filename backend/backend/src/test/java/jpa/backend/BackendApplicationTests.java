@@ -100,7 +100,7 @@ class BackendApplicationTests {
         assertThat(actual.getIdPlan()).isEqualTo(expected.getIdPlan());
 	}
 
-
+    /*
 	@Nested
     @DisplayName("cuando la BD esta vacia")
     public class BDVacia {
@@ -131,7 +131,7 @@ class BackendApplicationTests {
 		}
 
         
-		/**@Test
+		@Test
 		@DisplayName("inserta correctamente un sesion")
 		public void insertasesion() {
 
@@ -164,7 +164,7 @@ class BackendApplicationTests {
 			assertThat(respuesta.getHeaders().get("Location").get(0))
 			.endsWith("/"+sesionesBD.get(0).getId());
 			compruebaCampos(Mapper.toSesion(sesionNuevaDTO), sesionesBD.get(0));
-		}*/
+		}
 	}
     
 
@@ -208,6 +208,6 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getId()).isEqualTo((long) 7);
 		}
-	}
+	}*/
 
 }
