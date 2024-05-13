@@ -20,8 +20,8 @@ public class SesionService {
         this.repoSesion=repo;
     }
 
-    public List<Sesion> getTodasSesiones(){
-        return repoSesion.findAll();
+    public List<Sesion> getSesiones(Long idPlan){
+        return repoSesion.findByIdPlan(idPlan);
     }
 
     public Sesion aniadirSesion(Sesion sesion) {
@@ -36,7 +36,7 @@ public class SesionService {
 		if (s.isPresent()){
 			return s;
 		} else {
-			throw new SesionNoAsociadaException();
+			throw new SesionInexistenteException();
 		}
 	}
 
