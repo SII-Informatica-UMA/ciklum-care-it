@@ -71,4 +71,10 @@ public class SesionController {
 		}
 	}
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteSesion(@PathVariable Long id) {
+        servicioSesion.deleteSesion(id);
+    }
+
 }

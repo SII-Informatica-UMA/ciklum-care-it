@@ -48,4 +48,14 @@ public class SesionService {
         }
     }
 
+    public void deleteSesion(Long id){
+        var sesion = repoSesion.findById(id);
+
+        if(sesion.isPresent()){
+            repoSesion.deleteById(id);
+        }else{
+            throw new SesionInexistenteException();
+        }
+    }
+
 }
