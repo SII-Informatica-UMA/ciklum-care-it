@@ -166,6 +166,20 @@ class BackendApplicationTests {
 			.endsWith("/"+sesionesBD.get(0).getId());
 			compruebaCampos(Mapper.toSesion(sesionNuevaDTO), sesionesBD.get(0));
 		}
+
+        @Test
+        @DisplayName("error al eliminar una sesión inexistente")
+        public void errorEliminarSinSesiones() {
+
+            var peticion = delete("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
 	}
     
 
@@ -209,6 +223,20 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getId()).isEqualTo((long) 7);
 		}
+
+        @Test
+        @DisplayName("Borra correctamente una sesion")
+        public void borraSesion() {
+
+            var peticion = delete("http", "localhost", port, "/sesion/1");
+
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<Sesion>() {
+                });
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+
 	}
 
 }
