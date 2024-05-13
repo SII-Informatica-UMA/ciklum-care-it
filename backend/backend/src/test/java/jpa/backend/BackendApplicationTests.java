@@ -1,5 +1,6 @@
 package jpa.backend;
 
+import sesiones.backend.BackendApplication;
 import sesiones.backend.controllers.Mapper;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = BackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("En el servicio de niveles y grupos")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class BackendApplicationTests {
@@ -100,7 +101,7 @@ class BackendApplicationTests {
         assertThat(actual.getIdPlan()).isEqualTo(expected.getIdPlan());
 	}
 
-    /*
+    
 	@Nested
     @DisplayName("cuando la BD esta vacia")
     public class BDVacia {
@@ -208,6 +209,6 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getId()).isEqualTo((long) 7);
 		}
-	}*/
+	}
 
 }
