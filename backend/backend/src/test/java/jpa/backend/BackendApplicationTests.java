@@ -121,8 +121,8 @@ class BackendApplicationTests {
         }
 
 		@Test
-		@DisplayName("error al obtener un nivel educativo concreto")
-		public void errorAlObtenerNivelConcreto() {
+		@DisplayName("error al obtener una sesion concreta")
+		public void errorAlObtenerSesionConcreta() {
 			var peticion = get("http", "localhost",port, "/sesion/1");
 
 			var respuesta = restTemplate.exchange(peticion,
@@ -191,10 +191,10 @@ class BackendApplicationTests {
 		@BeforeEach
 		public void insertarDatos() {
 			var sesion1 = new Sesion();
-			sesion1.setId((long) 1);
+			sesion1.setDescripcion("Piernas");
 
 			var sesion2 = new Sesion();
-			sesion1.setId((long) 7);
+			sesion2.setDescripcion("Pecho");
 
 			sesionRepository.save(sesion1);
 			sesionRepository.save(sesion2);
@@ -221,7 +221,7 @@ class BackendApplicationTests {
 					new ParameterizedTypeReference<Sesion>() {});
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
-			assertThat(respuesta.getBody().getId()).isEqualTo((long) 7);
+			assertThat(respuesta.getBody().getDescripcion()).isEqualTo("Pecho");
 		}
 
         @Test
