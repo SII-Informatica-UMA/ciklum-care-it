@@ -25,8 +25,8 @@ public class SesionController {
     }
 
     @GetMapping()
-	public ResponseEntity<List<SesionDTO>> listaDeSesiones() {
-		return ResponseEntity.ok(servicioSesion.getTodasSesiones().stream()
+	public ResponseEntity<List<SesionDTO>> listaDeSesiones(@RequestParam(value="idPlan") Long planId) {
+		return ResponseEntity.ok(servicioSesion.getSesiones(planId).stream()
 			.map(Mapper::toSesionDTO)
 			.toList());
 	}
