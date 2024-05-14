@@ -59,7 +59,6 @@ public class SesionController {
 		} catch(SesionInexistenteException e){
 			return ResponseEntity.status(404).build();
 		}
-        
 	}
 
     @PutMapping("/{id}")
@@ -74,11 +73,12 @@ public class SesionController {
 	}
 
     @DeleteMapping("/{id}")
-    public void deleteSesion(@PathVariable Long id) {
+    public ResponseEntity<?> deleteSesion(@PathVariable Long id) {
         try{
             servicioSesion.deleteSesion(id);
+            return ResponseEntity.ok().build();
         }catch(SesionInexistenteException ne){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recurso no encontrado", ne);
+            return ResponseEntity.status(404).build();
         }
         
     }

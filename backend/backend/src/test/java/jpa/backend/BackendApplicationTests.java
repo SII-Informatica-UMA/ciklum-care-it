@@ -43,7 +43,7 @@ class BackendApplicationTests {
     @Value(value = "${local.server.port}")
     private int port;
 
-    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1NzE1MjE3LCJleHAiOjE3MTU3MjEyMTd9.mcmRMR0ayqOPVJE_7R0RAxkLZf0kuv5tQgYZAxC3MDgAsiN5I9HxMuRNf0GjsyKij9LPVH-OOgGxdrzKCNIg-Q";
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1NzIxNTczLCJleHAiOjE3MTU4MDc5NzN9.bPZqGzneDZp5NhDuNH3xXn1zmT2gRivU0JcsZdt3jHFTng7od-5shpMsxpltmojn1HwLHYa0HdjYHS6qPJoYPg";
 
     @Autowired
     private SesionRepository sesionRepository;
@@ -77,6 +77,24 @@ class BackendApplicationTests {
         return peticion;
     }
 
+    private RequestEntity<Void> get(String scheme, String host, int port, String path,Long idPlan) {
+        URI uri = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+
+        String urlTemplate = UriComponentsBuilder.fromHttpUrl(uri.toString())
+                .queryParam("idPlan", idPlan)
+                .encode()
+                .toUriString();
+
+        var peticion = RequestEntity.get(urlTemplate)
+            .accept(MediaType.APPLICATION_JSON)
+            .headers(headers)
+            .build();
+        return peticion;
+    }
+
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
 
@@ -86,19 +104,6 @@ class BackendApplicationTests {
         var peticion = RequestEntity.delete(uri)
             .headers(headers)
             .build();
-        return peticion;
-    }
-
-    private <T> RequestEntity<T> post(String scheme, String host, int port, String path, T object) {
-        URI uri = uri(scheme, host, port, path);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
-        
-        var peticion = RequestEntity.post(uri)
-            .contentType(MediaType.APPLICATION_JSON)
-            .headers(headers)
-            .body(object);
         return peticion;
     }
 
@@ -117,6 +122,10 @@ class BackendApplicationTests {
 
       private <T> RequestEntity<T> post(String scheme, String host, int port, String path, T object, Long idPlan) {
         URI uriAux = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+
         String urlTemplate = UriComponentsBuilder.fromHttpUrl(uriAux.toString())
                 .queryParam("idPlan", idPlan)
                 .encode()
@@ -124,6 +133,7 @@ class BackendApplicationTests {
 
                 var peticion = RequestEntity.post(urlTemplate)
                     .contentType(MediaType.APPLICATION_JSON)
+                    .headers(headers)
                     .body(object);
                 return peticion;
         }
@@ -151,7 +161,7 @@ class BackendApplicationTests {
         @DisplayName("devuelve la lista de sesiones vacia")
         public void devuelveSesionesVacia() {
 
-            var peticion = get("http", "localhost", port, "/sesion?idPlan=1");
+            var peticion = get("http","localhost",port,"/sesion",1L);
 
             var respuesta = restTemplate.exchange(peticion,
                 new ParameterizedTypeReference<List<SesionDTO>>() {
@@ -191,18 +201,17 @@ class BackendApplicationTests {
             
             
 			// Preparamos la petición con el sesion dentro
-			var peticion = post("http", "localhost",port, "/sesion", sesionNuevaDTO, 1L);
-
+            var peticion = post("http","localhost",port,"/sesion",sesionNuevaDTO,1L);
 			// Invocamos al servicio REST 
 			//var respuesta = restTemplate.exchange(peticion,Void.class);
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<List<SesionDTO>>() {
+                new ParameterizedTypeReference<SesionDTO>() {
                 });
 
 			// Comprobamos el resultado
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
 			assertThat(respuesta.getHeaders().get("Location").get(0))
-			.startsWith("http://localhost:"+port+"/sesiones");
+			.startsWith("http://localhost:"+port+"/sesion/1");
 
 			List<Sesion> sesionesBD = sesionRepository.findAll();
 			assertThat(sesionesBD).hasSize(1);
@@ -268,7 +277,7 @@ class BackendApplicationTests {
 		@Test
 		@DisplayName("devuelve una lista de sesiones")
 		public void devuelveListaSesiones() {
-			var peticion = get("http", "localhost",port, "/sesion?idPlan=1");
+            var peticion = get("http","localhost",port,"/sesion",1L);
 
 			var respuesta = restTemplate.exchange(peticion,
 					new ParameterizedTypeReference<List<SesionDTO>>() {});
