@@ -36,7 +36,7 @@ public class SesionService {
 		if (s.isPresent()){
 			return s;
 		} else {
-			throw new SesionNoAsociadaException();
+			throw new SesionInexistenteException();
 		}
 	}
 

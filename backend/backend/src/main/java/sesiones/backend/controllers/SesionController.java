@@ -56,9 +56,10 @@ public class SesionController {
 		try {
 			Optional<Sesion> sesion = servicioSesion.obtenerSesion(id);
 			return ResponseEntity.of(sesion.map(Mapper::toSesionDTO));
-		} catch(SesionNoAsociadaException e){
+		} catch(SesionInexistenteException e){
 			return ResponseEntity.status(404).build();
 		}
+        
 	}
 
     @PutMapping("/{id}")
