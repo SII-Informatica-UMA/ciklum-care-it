@@ -25,6 +25,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriBuilderFactory;
 import java.net.URI;
+import org.springframework.http.HttpHeaders;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +40,8 @@ class BackendApplicationTests {
 
     @Value(value = "${local.server.port}")
     private int port;
+
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1NzE1MjE3LCJleHAiOjE3MTU3MjEyMTd9.mcmRMR0ayqOPVJE_7R0RAxkLZf0kuv5tQgYZAxC3MDgAsiN5I9HxMuRNf0GjsyKij9LPVH-OOgGxdrzKCNIg-Q";
 
     @Autowired
     private SesionRepository sesionRepository;
@@ -61,31 +64,51 @@ class BackendApplicationTests {
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+
         var peticion = RequestEntity.get(uri)
             .accept(MediaType.APPLICATION_JSON)
+            .headers(headers)
             .build();
         return peticion;
     }
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+
         var peticion = RequestEntity.delete(uri)
+            .headers(headers)
             .build();
         return peticion;
     }
 
     private <T> RequestEntity<T> post(String scheme, String host, int port, String path, T object) {
         URI uri = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+        
         var peticion = RequestEntity.post(uri)
             .contentType(MediaType.APPLICATION_JSON)
+            .headers(headers)
             .body(object);
         return peticion;
     }
 
     private <T> RequestEntity<T> put(String scheme, String host, int port, String path, T object) {
         URI uri = uri(scheme, host, port, path);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
+
         var peticion = RequestEntity.put(uri)
             .contentType(MediaType.APPLICATION_JSON)
+            .headers(headers)
             .body(object);
         return peticion;
     }
@@ -187,11 +210,11 @@ class BackendApplicationTests {
 		@DisplayName("devuelve error al editar una sesión inexistente")
 		public void actualizaAlumno() {
 			
-			// Preparamos el ingrediente a actualizar
+			// Preparamos la sesión a actualizar
 			var alum = SesionDTO.builder()
 									.inicio("2024-03-30T08:00:00")
 									.build();
-			// Preparamos la petición con el ingrediente dentro
+			// Preparamos la petición con la sesión dentro
 			var peticion = put("http", "localhost",port, "/sesion/1", alum);
 			
 			// Invocamos al servicio REST 
@@ -265,12 +288,12 @@ class BackendApplicationTests {
 		@DisplayName("edita una sesión existente")
 		public void actualizaAlumno() {
 
-			// Preparamos el ingrediente a actualizar
+			// Preparamos la sesión a actualizar
 			var sesion = SesionDTO.builder()
 									.descripcion("Pecho")
                                     .inicio("2024-03-31T08:00:00")
 									.build();
-			//Buscamos el id del ingrediente de la bbdd y preparamos la petición
+			//Buscamos la sesión en la bbdd para obtener el id y preparamos la petición
 			Sesion sesionExist = sesionRepository.findByInicio("2024-03-30T08:00:00").get(0);
 			var peticion = put("http", "localhost",port, "/sesion/"+sesionExist.getId(),sesion);
 			
