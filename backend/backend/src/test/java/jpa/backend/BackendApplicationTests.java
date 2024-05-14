@@ -24,6 +24,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriBuilderFactory;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.net.URI;
 import org.springframework.http.HttpHeaders;
 import java.util.List;
@@ -113,6 +115,22 @@ class BackendApplicationTests {
         return peticion;
     }
 
+      private <T> RequestEntity<T> post(String scheme, String host, int port, String path, T object, Long idPlan) {
+        URI uriAux = uri(scheme, host, port, path);
+        String urlTemplate = UriComponentsBuilder.fromHttpUrl(uriAux.toString())
+                .queryParam("idPlan", idPlan)
+                .encode()
+                .toUriString();
+
+                var peticion = RequestEntity.post(urlTemplate)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(object);
+                return peticion;
+        }
+
+                
+    
+
     private void compruebaCampos(Sesion expected, Sesion actual) {	
 		assertThat(actual.getInicio()).isEqualTo(expected.getInicio());
 		assertThat(actual.getFin()).isEqualTo(expected.getFin());
@@ -155,14 +173,14 @@ class BackendApplicationTests {
 		}
 
         
-		@Test
+        @Test
 		@DisplayName("inserta correctamente un sesion")
 		public void insertasesion() {
 
 			// Preparamos el sesion a insertar
 			var sesionNuevaDTO = SesionNuevaDTO.builder()
-                    .inicio("")
-                    .fin("")
+                    .inicio("2024-03-31T08:00:00")
+                    .fin("2024-03-31T08:00:01")
                     .trabajoRealizado("3 sentadillas")
                     .multimedia(new Multimedia("imagen", "video"))
                     .descripcion("todo muy bien")
@@ -173,7 +191,7 @@ class BackendApplicationTests {
             
             
 			// Preparamos la petición con el sesion dentro
-			var peticion = post("http", "localhost",port, "/sesion?idPlan=1", sesionNuevaDTO);
+			var peticion = post("http", "localhost",port, "/sesion", sesionNuevaDTO, 1L);
 
 			// Invocamos al servicio REST 
 			//var respuesta = restTemplate.exchange(peticion,Void.class);
@@ -200,7 +218,7 @@ class BackendApplicationTests {
             var peticion = delete("http", "localhost", port, "/sesion/1");
 
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<Sesion>() {
+                new ParameterizedTypeReference<SesionDTO>() {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -259,13 +277,13 @@ class BackendApplicationTests {
 			assertThat(respuesta.getBody()).hasSize(2);
 		}
 
-		@Test
+        @Test
 		@DisplayName("obtiene una sesion concreta")
 		public void obtenerSesionConcreta() {
 			var peticion = get("http", "localhost",port, "/sesion/2");
 
 			var respuesta = restTemplate.exchange(peticion,
-					new ParameterizedTypeReference<Sesion>() {});
+					new ParameterizedTypeReference<SesionDTO>() {});
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getDescripcion()).isEqualTo("Pecho");
@@ -278,7 +296,7 @@ class BackendApplicationTests {
             var peticion = delete("http", "localhost", port, "/sesion/1");
 
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<Sesion>() {
+                new ParameterizedTypeReference<SesionDTO>() {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);

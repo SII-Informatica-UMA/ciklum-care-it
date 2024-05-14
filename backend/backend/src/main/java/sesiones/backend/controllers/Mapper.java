@@ -4,8 +4,6 @@ import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
 
-import java.util.List;
-
 public class Mapper {
     public static SesionDTO toSesionDTO(Sesion sesion) {
         return SesionDTO.builder()
