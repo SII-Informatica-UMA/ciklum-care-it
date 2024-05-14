@@ -110,10 +110,10 @@ class BackendApplicationTests {
         @DisplayName("devuelve la lista de sesiones vacia")
         public void devuelveSesionesVacia() {
 
-            var peticion = get("http", "localhost", port, "/sesion");
+            var peticion = get("http", "localhost", port, "/sesion?idPlan=1");
 
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<List<Sesion>>() {
+                new ParameterizedTypeReference<List<SesionDTO>>() {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
@@ -150,10 +150,13 @@ class BackendApplicationTests {
             
             
 			// Preparamos la petición con el sesion dentro
-			var peticion = post("http", "localhost",port, "/sesiones", sesionNuevaDTO);
+			var peticion = post("http", "localhost",port, "/sesion?idPlan=1", sesionNuevaDTO);
 
 			// Invocamos al servicio REST 
-			var respuesta = restTemplate.exchange(peticion,Void.class);
+			//var respuesta = restTemplate.exchange(peticion,Void.class);
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<List<SesionDTO>>() {
+                });
 
 			// Comprobamos el resultado
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
@@ -210,10 +213,12 @@ class BackendApplicationTests {
 		public void insertarDatos() {
 			var sesion1 = new Sesion();
 			sesion1.setDescripcion("Piernas");
+            sesion1.setIdPlan((long) 1);
 
 			var sesion2 = new Sesion();
 			sesion2.setDescripcion("Pecho");
             sesion2.setInicio("2024-03-30T08:00:00");
+            sesion2.setIdPlan((long) 1);
 
 			sesionRepository.save(sesion1);
 			sesionRepository.save(sesion2);
@@ -222,13 +227,13 @@ class BackendApplicationTests {
 		@Test
 		@DisplayName("devuelve una lista de sesiones")
 		public void devuelveListaSesiones() {
-			var peticion = get("http", "localhost",port, "/sesion");
+			var peticion = get("http", "localhost",port, "/sesion?idPlan=1");
 
 			var respuesta = restTemplate.exchange(peticion,
-					new ParameterizedTypeReference<List<Sesion>>() {});
+					new ParameterizedTypeReference<List<SesionDTO>>() {});
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
-			assertThat(respuesta.getBody().size()).isEqualTo(2);
+			assertThat(respuesta.getBody()).hasSize(2);
 		}
 
 		@Test
