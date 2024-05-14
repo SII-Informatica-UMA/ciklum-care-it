@@ -132,7 +132,7 @@ class BackendApplicationTests {
 		}
 
         
-		@Test
+        @Test
 		@DisplayName("inserta correctamente un sesion")
 		public void insertasesion() {
 
@@ -177,7 +177,7 @@ class BackendApplicationTests {
             var peticion = delete("http", "localhost", port, "/sesion/1");
 
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<Sesion>() {
+                new ParameterizedTypeReference<SesionDTO>() {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -236,13 +236,13 @@ class BackendApplicationTests {
 			assertThat(respuesta.getBody()).hasSize(2);
 		}
 
-		@Test
+        @Test
 		@DisplayName("obtiene una sesion concreta")
 		public void obtenerSesionConcreta() {
 			var peticion = get("http", "localhost",port, "/sesion/2");
 
 			var respuesta = restTemplate.exchange(peticion,
-					new ParameterizedTypeReference<Sesion>() {});
+					new ParameterizedTypeReference<SesionDTO>() {});
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getDescripcion()).isEqualTo("Pecho");
@@ -255,7 +255,7 @@ class BackendApplicationTests {
             var peticion = delete("http", "localhost", port, "/sesion/1");
 
             var respuesta = restTemplate.exchange(peticion,
-                new ParameterizedTypeReference<Sesion>() {
+                new ParameterizedTypeReference<SesionDTO>() {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);

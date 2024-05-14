@@ -1,11 +1,7 @@
 package sesiones.backend.dtos;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import lombok.*;
 import sesiones.backend.entities.DatosSalud;
 import sesiones.backend.entities.Multimedia;
-
-import java.util.List;
 
 @Getter
 @Setter
