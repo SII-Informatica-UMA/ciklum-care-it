@@ -150,10 +150,13 @@ class BackendApplicationTests {
             
             
 			// Preparamos la petición con el sesion dentro
-			var peticion = post("http", "localhost",port, "/sesiones", sesionNuevaDTO);
+			var peticion = post("http", "localhost",port, "/sesion?idPlan=1", sesionNuevaDTO);
 
 			// Invocamos al servicio REST 
-			var respuesta = restTemplate.exchange(peticion,Void.class);
+			//var respuesta = restTemplate.exchange(peticion,Void.class);
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<List<SesionDTO>>() {
+                });
 
 			// Comprobamos el resultado
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
