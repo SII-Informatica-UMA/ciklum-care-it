@@ -180,6 +180,24 @@ class BackendApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
 
+        @Test
+		@DisplayName("devuelve error al editar una sesión inexistente")
+		public void actualizaAlumno() {
+			
+			// Preparamos el ingrediente a actualizar
+			var alum = SesionDTO.builder()
+									.inicio("2024-03-30T08:00:00")
+									.build();
+			// Preparamos la petición con el ingrediente dentro
+			var peticion = put("http", "localhost",port, "/sesion/1", alum);
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+		}
+
 	}
     
 
@@ -195,6 +213,7 @@ class BackendApplicationTests {
 
 			var sesion2 = new Sesion();
 			sesion2.setDescripcion("Pecho");
+            sesion2.setInicio("2024-03-30T08:00:00");
 
 			sesionRepository.save(sesion1);
 			sesionRepository.save(sesion2);
@@ -236,6 +255,29 @@ class BackendApplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
+
+        @Test
+		@DisplayName("edita una sesión existente")
+		public void actualizaAlumno() {
+
+			// Preparamos el ingrediente a actualizar
+			var sesion = SesionDTO.builder()
+									.descripcion("Pecho")
+                                    .inicio("2024-03-31T08:00:00")
+									.build();
+			//Buscamos el id del ingrediente de la bbdd y preparamos la petición
+			Sesion sesionExist = sesionRepository.findByInicio("2024-03-30T08:00:00").get(0);
+			var peticion = put("http", "localhost",port, "/sesion/"+sesionExist.getId(),sesion);
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+			var listaSesiones = sesionRepository.findByInicio("2024-03-31T08:00:00");
+			assertThat(listaSesiones).hasSize(1);
+            assertThat(listaSesiones.get(0).getInicio()).isEqualTo("2024-03-31T08:00:00");
+		}
 
 	}
 
