@@ -43,7 +43,7 @@ class BackendApplicationTests {
     @Value(value = "${local.server.port}")
     private int port;
 
-    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1NzIxNTczLCJleHAiOjE3MTU4MDc5NzN9.bPZqGzneDZp5NhDuNH3xXn1zmT2gRivU0JcsZdt3jHFTng7od-5shpMsxpltmojn1HwLHYa0HdjYHS6qPJoYPg";
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE2MDMzNTQ4LCJleHAiOjE3MTg2MjU1NDh9.0EMk13GFbgr5vN2Si-pJrPQemHxzfbpq0kFJYExgsSY-K6p-J-LzeEjWhSFkw4WhIoWuKZKSQkupY-Y7FKaxjg";
 
     @Autowired
     private SesionRepository sesionRepository;

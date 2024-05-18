@@ -31,7 +31,6 @@ public class SecurityConfguration {
                 .csrf(cs -> cs.disable())
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login", "/passwordreset", "/forgottenpassword").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->

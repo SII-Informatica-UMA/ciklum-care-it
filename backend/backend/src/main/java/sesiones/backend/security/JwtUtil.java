@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import sesiones.backend.entities.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -92,11 +91,6 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getUsername());
-    }
-
-    public String generateToken(Usuario usuario) {
-        Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, usuario.getId().toString());
     }
 
     //while creating the token -
