@@ -223,6 +223,38 @@ class BackendApplicationTests {
 		}
 
         @Test
+		@DisplayName("devuelve error al insertar sesion no asociada a plan")
+		public void errorinsertasesion() {
+
+			// Preparamos el sesion a insertar
+			var sesionNuevaDTO = SesionNuevaDTO.builder()
+                    .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
+                    .fin(Timestamp.valueOf("2024-03-31 08:00:01"))
+                    .trabajoRealizado("3 sentadillas")
+                    .multimedia(List.of("imagen", "video"))
+                    .descripcion("todo muy bien")
+                    .presencial(false)
+                    .datosSalud(List.of("25","32", "43"))
+                    .idPlan(null)
+					.build();
+            
+            
+			// Preparamos la petición con el sesion dentro
+            var peticion = post("http","localhost",port,"/sesion",sesionNuevaDTO, null);
+			// Invocamos al servicio REST 
+			//var respuesta = restTemplate.exchange(peticion,Void.class);
+            var respuesta = restTemplate.exchange(peticion,
+                new ParameterizedTypeReference<SesionDTO>() {
+                });
+
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
+			List<Sesion> sesionesBD = sesionRepository.findAll();
+			assertThat(sesionesBD).hasSize(0);
+			
+		}
+
+        @Test
         @DisplayName("error al eliminar una sesión inexistente")
         public void errorEliminarSinSesiones() {
 

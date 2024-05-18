@@ -34,7 +34,7 @@ public class SesionController {
 
     @PostMapping()
     public ResponseEntity<SesionDTO> aniadirSesion(@RequestBody SesionNuevaDTO sesion, @RequestParam(value="idPlan") Long planId, UriComponentsBuilder builder) {
-        try{
+       
             Sesion sesionAux = Mapper.toSesion(sesion);
             sesionAux.setIdPlan(planId);
             sesionAux = servicioSesion.aniadirSesion(sesionAux);
@@ -46,9 +46,6 @@ public class SesionController {
                     .build()
                     .toUri();
             return ResponseEntity.created(uri).body(sesionDTO);
-        }catch(SesionNoAsociadaException e){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
     }
 
     @GetMapping("/{id}")
