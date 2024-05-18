@@ -1,5 +1,7 @@
 package sesiones.backend.entities;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,22 +17,22 @@ public class Sesion {
     private Long id;
 
     @Column(length = 50)
-    private String inicio;
+    private Timestamp inicio;
     @Column(length = 50)
-    private String fin;
+    private Timestamp fin;
 
     @Column(length = 4000)
     private String trabajoRealizado;
 
-    @Embedded
-    private Multimedia multimedia;
+    @ElementCollection
+    private List<String>  multimedia;
 
     @Column(length = 4000)
     private String descripcion;
     private Boolean presencial;
 
-    @Embedded
-    private DatosSalud datosSalud;
+    @ElementCollection
+    private List<String>  datosSalud;
 
     private Long idPlan;
 
@@ -64,19 +66,19 @@ public class Sesion {
         this.idPlan = idPlan;
     }
 
-    public String getInicio() {
+    public Timestamp getInicio() {
         return inicio;
     }
 
-    public void setInicio(String inicio) {
+    public void setInicio(Timestamp inicio) {
         this.inicio = inicio;
     }
 
-    public String getFin() {
+    public Timestamp getFin() {
         return fin;
     }
 
-    public void setFin(String fin) {
+    public void setFin(Timestamp fin) {
         this.fin = fin;
     }
 
@@ -88,11 +90,11 @@ public class Sesion {
         this.trabajoRealizado = trabajoRealizado;
     }
 
-    public Multimedia getMultimedia() {
+    public List<String>  getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(Multimedia multimedia) {
+    public void setMultimedia(List<String>  multimedia) {
         this.multimedia = multimedia;
     }
 
@@ -112,11 +114,11 @@ public class Sesion {
         this.presencial = presencial;
     }
 
-    public DatosSalud getDatosSalud() {
+    public List<String>  getDatosSalud() {
         return datosSalud;
     }
 
-    public void setDatosSalud(DatosSalud datosSalud) {
+    public void setDatosSalud(List<String>  datosSalud) {
         this.datosSalud = datosSalud;
     }
 

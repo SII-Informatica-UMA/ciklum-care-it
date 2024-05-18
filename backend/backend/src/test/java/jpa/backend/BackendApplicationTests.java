@@ -27,6 +27,8 @@ import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.sql.Timestamp;
+
 import org.springframework.http.HttpHeaders;
 import java.util.List;
 
@@ -189,13 +191,13 @@ class BackendApplicationTests {
 
 			// Preparamos el sesion a insertar
 			var sesionNuevaDTO = SesionNuevaDTO.builder()
-                    .inicio("2024-03-31T08:00:00")
-                    .fin("2024-03-31T08:00:01")
+                    .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
+                    .fin(Timestamp.valueOf("2024-03-31 08:00:01"))
                     .trabajoRealizado("3 sentadillas")
-                    .multimedia(new Multimedia("imagen", "video"))
+                    .multimedia(List.of("imagen", "video"))
                     .descripcion("todo muy bien")
                     .presencial(false)
-                    .datosSalud(new DatosSalud(25L,32L, 43L))
+                    .datosSalud(List.of("25","32", "43"))
                     .idPlan(1L)
 					.build();
             
@@ -239,7 +241,7 @@ class BackendApplicationTests {
 			
 			// Preparamos la sesión a actualizar
 			var alum = SesionDTO.builder()
-									.inicio("2024-03-30T08:00:00")
+									.inicio(Timestamp.valueOf("2024-03-30 08:00:00"))
 									.build();
 			// Preparamos la petición con la sesión dentro
 			var peticion = put("http", "localhost",port, "/sesion/1", alum);
@@ -267,7 +269,7 @@ class BackendApplicationTests {
 
 			var sesion2 = new Sesion();
 			sesion2.setDescripcion("Pecho");
-            sesion2.setInicio("2024-03-30T08:00:00");
+            sesion2.setInicio(Timestamp.valueOf("2024-03-30 08:00:00"));
             sesion2.setIdPlan((long) 1);
 
 			sesionRepository.save(sesion1);
@@ -318,10 +320,10 @@ class BackendApplicationTests {
 			// Preparamos la sesión a actualizar
 			var sesion = SesionDTO.builder()
 									.descripcion("Pecho")
-                                    .inicio("2024-03-31T08:00:00")
+                                    .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
 									.build();
 			//Buscamos la sesión en la bbdd para obtener el id y preparamos la petición
-			Sesion sesionExist = sesionRepository.findByInicio("2024-03-30T08:00:00").get(0);
+			Sesion sesionExist = sesionRepository.findByInicio(Timestamp.valueOf("2024-03-30 08:00:00")).get(0);
 			var peticion = put("http", "localhost",port, "/sesion/"+sesionExist.getId(),sesion);
 			
 			// Invocamos al servicio REST 
@@ -329,7 +331,7 @@ class BackendApplicationTests {
 			
 			// Comprobamos el resultado
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
-			var listaSesiones = sesionRepository.findByInicio("2024-03-31T08:00:00");
+			var listaSesiones = sesionRepository.findByInicio(Timestamp.valueOf("2024-03-31 08:00:00"));
 			assertThat(listaSesiones).hasSize(1);
             assertThat(listaSesiones.get(0).getInicio()).isEqualTo("2024-03-31T08:00:00");
 		}
