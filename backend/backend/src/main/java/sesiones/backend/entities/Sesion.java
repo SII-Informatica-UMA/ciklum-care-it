@@ -24,14 +24,14 @@ public class Sesion {
     @Column(length = 4000)
     private String trabajoRealizado;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String>  multimedia;
 
     @Column(length = 4000)
     private String descripcion;
     private Boolean presencial;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String>  datosSalud;
 
     private Long idPlan;

@@ -4,8 +4,6 @@ import sesiones.backend.BackendApplication;
 import sesiones.backend.controllers.Mapper;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
-import sesiones.backend.entities.DatosSalud;
-import sesiones.backend.entities.Multimedia;
 import sesiones.backend.entities.Sesion;
 import sesiones.backend.repositories.SesionRepository;
 
@@ -30,6 +28,8 @@ import java.net.URI;
 import java.sql.Timestamp;
 
 import org.springframework.http.HttpHeaders;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -147,10 +147,10 @@ class BackendApplicationTests {
 		assertThat(actual.getInicio()).isEqualTo(expected.getInicio());
 		assertThat(actual.getFin()).isEqualTo(expected.getFin());
 		assertThat(actual.getTrabajoRealizado()).isEqualTo(expected.getTrabajoRealizado());
-        assertThat(actual.getMultimedia()).isEqualTo(expected.getMultimedia());
+        assertThat(new ArrayList<>(actual.getMultimedia())).isEqualTo(expected.getMultimedia());
         assertThat(actual.getDescripcion()).isEqualTo(expected.getDescripcion());
         assertThat(actual.getPresencial()).isEqualTo(expected.getPresencial());
-        assertThat(actual.getDatosSalud()).isEqualTo(expected.getDatosSalud());
+        assertThat(new ArrayList<>(actual.getDatosSalud())).isEqualTo(expected.getDatosSalud());
         assertThat(actual.getIdPlan()).isEqualTo(expected.getIdPlan());
 	}
 
@@ -333,7 +333,7 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			var listaSesiones = sesionRepository.findByInicio(Timestamp.valueOf("2024-03-31 08:00:00"));
 			assertThat(listaSesiones).hasSize(1);
-            assertThat(listaSesiones.get(0).getInicio()).isEqualTo("2024-03-31T08:00:00");
+            assertThat(listaSesiones.get(0).getInicio()).isEqualTo(Timestamp.valueOf("2024-03-31 08:00:00"));
 		}
 
 	}

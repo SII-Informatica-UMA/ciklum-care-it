@@ -3,8 +3,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.*;
-import sesiones.backend.entities.DatosSalud;
-import sesiones.backend.entities.Multimedia;
 
 @Getter
 @Setter
