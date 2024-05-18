@@ -1,4 +1,6 @@
 package sesiones.backend.dtos;
+import java.sql.Timestamp;
+
 import lombok.*;
 import sesiones.backend.entities.DatosSalud;
 import sesiones.backend.entities.Multimedia;
@@ -11,8 +13,8 @@ import sesiones.backend.entities.Multimedia;
 @EqualsAndHashCode
 @ToString
 public class SesionNuevaDTO {
-    private String inicio;
-    private String fin;
+    private Timestamp inicio;
+    private Timestamp fin;
     private String trabajoRealizado;
     private Multimedia multimedia; //List<String>
     private String descripcion;
