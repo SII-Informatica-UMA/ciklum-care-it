@@ -194,10 +194,10 @@ class BackendApplicationTests {
                     .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
                     .fin(Timestamp.valueOf("2024-03-31 08:00:01"))
                     .trabajoRealizado("3 sentadillas")
-                    .multimedia(new Multimedia("imagen", "video"))
+                    .multimedia(List.of("imagen", "video"))
                     .descripcion("todo muy bien")
                     .presencial(false)
-                    .datosSalud(new DatosSalud(25L,32L, 43L))
+                    .datosSalud(List.of("25","32", "43"))
                     .idPlan(1L)
 					.build();
             

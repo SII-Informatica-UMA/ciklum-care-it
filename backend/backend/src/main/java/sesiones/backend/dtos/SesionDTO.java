@@ -1,5 +1,6 @@
 package sesiones.backend.dtos;
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.*;
 import sesiones.backend.entities.DatosSalud;
@@ -17,10 +18,10 @@ public class SesionDTO {
     private Timestamp inicio;
     private Timestamp fin;
     private String trabajoRealizado;
-    private Multimedia multimedia; //List<String> //¿Hay que crear un DTO para Multimedia y Datos Salud?
+    private List<String>  multimedia; //List<String> //¿Hay que crear un DTO para Multimedia y Datos Salud?
     private String descripcion;
     private Boolean presencial;
-    private DatosSalud datosSalud; //List<String>
+    private List<String>  datosSalud; //List<String>
     private Long idPlan;
 
 }
