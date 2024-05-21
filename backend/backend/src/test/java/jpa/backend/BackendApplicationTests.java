@@ -5,7 +5,9 @@ import sesiones.backend.controllers.Mapper;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
+import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.repositories.SesionRepository;
+import sesiones.backend.services.SesionService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = BackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("En el servicio de niveles y grupos")
@@ -49,6 +52,9 @@ class BackendApplicationTests {
 
     @Autowired
     private SesionRepository sesionRepository;
+
+    @Autowired
+    private SesionService sesionService;
 
     @BeforeEach
     public void initializeDatabase() {
@@ -251,6 +257,32 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
 			List<Sesion> sesionesBD = sesionRepository.findAll();
 			assertThat(sesionesBD).hasSize(0);
+			
+		}
+
+        @Test
+		@DisplayName("servicio lanza excepcion al guardar una sesion no asociada a plan")
+		public void errorGuardaSesionServicio() {
+
+			// Preparamos el sesion a insertar
+			var sesionNuevaDTO = SesionNuevaDTO.builder()
+                    .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
+                    .fin(Timestamp.valueOf("2024-03-31 08:00:01"))
+                    .trabajoRealizado("3 sentadillas")
+                    .multimedia(List.of("imagen", "video"))
+                    .descripcion("todo muy bien")
+                    .presencial(false)
+                    .datosSalud(List.of("25","32", "43"))
+                    .idPlan(null)
+					.build();
+                    Sesion sesionNueva = Mapper.toSesion(sesionNuevaDTO);
+            
+            
+			
+
+			// Comprobamos el resultado
+			assertThrows(SesionNoAsociadaException.class, () -> sesionService.aniadirSesion(sesionNueva));
+		
 			
 		}
 
