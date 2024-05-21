@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = BackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -401,5 +402,15 @@ class BackendApplicationTests {
 		}
 
 	}
+
+    @Nested
+    @DisplayName("independientes de la BD")
+    public class independienteDeBD {
+        @Test
+        public void testMapperInstantiation() {
+            Mapper mapper = new Mapper();
+            assertNotNull(mapper);
+        }
+    }
 
 }
