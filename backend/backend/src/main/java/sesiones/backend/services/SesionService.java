@@ -67,6 +67,9 @@ public class SesionService {
     }
 
     public Sesion aniadirSesion(Sesion sesion) {
+        if(sesion.getIdPlan() == null){
+            throw new SesionNoAsociadaException();
+        }
         return this.repoSesion.save(sesion);
     }
 
