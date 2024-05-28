@@ -5,6 +5,7 @@ import sesiones.backend.controllers.Mapper;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
+import sesiones.backend.exceptions.NoAutorizadoException;
 import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.repositories.SesionRepository;
 import sesiones.backend.services.SesionService;
@@ -613,7 +614,7 @@ class BackendApplicationTests {
 			
 
 			// Comprobamos el resultado
-			assertThrows(SesionNoAsociadaException.class, () -> sesionService.aniadirSesion(sesionNueva));
+			assertThrows(NoAutorizadoException.class, () -> sesionService.aniadirSesion(sesionNueva));
 		
 			
 		}
