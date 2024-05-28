@@ -97,9 +97,7 @@ public class SesionService {
     }
 
     public Sesion aniadirSesion(Sesion sesion) {
-        if(sesion.getIdPlan() == null){
-            throw new SesionNoAsociadaException();
-        }
+        comprobarSeguridad(sesion);
         return this.repoSesion.save(sesion);
     }
 
@@ -150,7 +148,29 @@ public class SesionService {
 	}
 
     public Sesion editarSesion(Sesion sesion) {
-//Inicio comprobación seguridad
+        comprobarSeguridad(sesion);
+
+        if(!repoSesion.existsById(sesion.getId()) || !repoSesion.findById(sesion.getId()).get().getIdPlan().equals(sesion.getIdPlan())){
+            throw new SesionInexistenteException();//Si pide una sesión que existe pero no está asociado al plan del usuario, devolvemos que no existe. El usuario no tiene por qué saber que existe.
+        }else{
+            return this.repoSesion.save(sesion);
+        }
+    }
+
+    public void deleteSesion(Long id){
+        var sesion = repoSesion.findById(id);
+
+        if(sesion.isPresent()){
+            repoSesion.deleteById(id);
+        }else{
+            throw new SesionInexistenteException();
+        }
+    }
+
+
+
+    private void comprobarSeguridad(Sesion sesion){
+        //Inicio comprobación seguridad
         if(sesion.getIdPlan()==null){
             throw new NoAutorizadoException();
         }
@@ -216,23 +236,9 @@ public class SesionService {
         if(!planesAsociados.contains(sesion.getIdPlan())){
             throw new NoAutorizadoException();
         }
-//Fin comprobación seguridad
 
-        if(!repoSesion.existsById(sesion.getId()) || !repoSesion.findById(sesion.getId()).get().getIdPlan().equals(sesion.getIdPlan())){
-            throw new SesionInexistenteException();//Si pide una sesión que existe pero no está asociado al plan del usuario, devolvemos que no existe. El usuario no tiene por qué saber que existe.
-        }else{
-            return this.repoSesion.save(sesion);
-        }
+        //Fin comprobación seguridad
+
     }
-
-    public void deleteSesion(Long id){
-        var sesion = repoSesion.findById(id);
-
-        if(sesion.isPresent()){
-            repoSesion.deleteById(id);
-        }else{
-            throw new SesionInexistenteException();
-        }
-    }
-
 }
+
