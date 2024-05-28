@@ -8,6 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
+import sesiones.backend.exceptions.NoAutorizadoException;
 import sesiones.backend.exceptions.SesionInexistenteException;
 import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.services.SesionService;
@@ -66,7 +67,9 @@ public class SesionController {
 			return ResponseEntity.ok(sesionEditada);
 		} catch(SesionInexistenteException e){
 			return ResponseEntity.status(404).build();
-		}
+		} catch(NoAutorizadoException e){
+            return ResponseEntity.status(403).build();
+        }
 	}
 
     @DeleteMapping("/{id}")

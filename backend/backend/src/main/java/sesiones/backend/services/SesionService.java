@@ -1,9 +1,11 @@
 package sesiones.backend.services;
 
 import java.net.URI;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import sesiones.backend.entities.Sesion;
+import sesiones.backend.exceptions.NoAutorizadoException;
 import sesiones.backend.exceptions.SesionInexistenteException;
 import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.repositories.SesionRepository;
@@ -33,6 +36,11 @@ public class SesionService {
     private final JwtUtil jwtUtil;
 
     private final RestTemplate restTemplate = new RestTemplate();
+
+    private final int puertoCentro=8081;
+    private final int puertoCliente=8082;
+    private final int puertoEntrenador=8083;
+    private final int puertoEntrena=8084;
 
     @Autowired
     public SesionService(SesionRepository repo, JwtUtil jwtUtil) {
@@ -141,8 +149,76 @@ public class SesionService {
 	}
 
     public Sesion editarSesion(Sesion sesion) {
-        if(!repoSesion.existsById(sesion.getId())){
-            throw new SesionInexistenteException();
+//Inicio comprobación seguridad
+        if(sesion.getIdPlan()==null){
+            throw new NoAutorizadoException();
+        }
+
+        Set<Long> planesAsociados = new HashSet<>();
+
+        Optional<UserDetails> user = SecurityConfguration.getAuthenticatedUser();
+        user.ifPresent(u -> log.info("Usuario autenticado: " + u.getUsername()));
+        String token = jwtUtil.generateToken(user.get());
+        user.ifPresent(u -> log.info("token: "+token));
+
+        //microservicio centrogerente ejecutado en el puerto 8081 con --server.port=8081
+        var peticionCentros = get("http","localhost",puertoCentro,"/centro",token);
+        restTemplate.exchange(peticionCentros,
+        new ParameterizedTypeReference<List<Map<String, Object>>>() {
+        }).getBody().stream()
+            .forEach(centro -> {
+                Long idCentro = Long.parseLong(centro.get("idCentro").toString());
+                var peticionClientes = get("http","localhost",puertoCliente,"/cliente",token, "centro", idCentro);
+                restTemplate.exchange(peticionClientes,
+                new ParameterizedTypeReference<List<Map<String, Object>>>(){
+                }).getBody().stream().forEach(cliente -> {
+                    if(Long.valueOf(cliente.get("idUsuario").toString()).equals(Long.valueOf(user.get().getUsername()))){
+                        Long idCliente = Long.parseLong(cliente.get("id").toString());
+                        var peticionEntrena = get("http","localhost",puertoEntrena,"/entrena",token, "cliente", idCliente);
+                        restTemplate.exchange(peticionEntrena, new ParameterizedTypeReference<List<Map<String,Object>>>() {           
+                        }).getBody().stream().forEach(entrena -> {
+                            @SuppressWarnings("unchecked")
+                            List<Map<String, Object>> planes = (List<Map<String, Object>>) entrena.get("planes");
+                            planes.stream().forEach(plan -> {
+                                planesAsociados.add(Long.valueOf(plan.get("id").toString()));
+                            }
+                            );
+                        } 
+                        );
+                    }
+                }
+                );
+
+                var peticionEntrenadores = get("http","localhost",puertoEntrenador,"/entrenador",token, "centro", idCentro);
+                restTemplate.exchange(peticionEntrenadores,
+                new ParameterizedTypeReference<List<Map<String, Object>>>(){
+                }).getBody().stream().forEach(entrenador -> {
+                    if(Long.valueOf(entrenador.get("idUsuario").toString()).equals(Long.valueOf(user.get().getUsername()))){
+                        Long idEntrenador = Long.parseLong(entrenador.get("id").toString());
+                        var peticionEntrena = get("http","localhost",puertoEntrena,"/entrena",token, "entrenador", idEntrenador);
+                        restTemplate.exchange(peticionEntrena, new ParameterizedTypeReference<List<Map<String,Object>>>() {  
+                        }).getBody().stream().forEach(entrena -> {
+                            @SuppressWarnings("unchecked")
+                            List<Map<String, Object>> planes = (List<Map<String, Object>>) entrena.get("planes");
+                            planes.stream().forEach(plan -> {
+                                planesAsociados.add(Long.valueOf(plan.get("id").toString()));
+                            }
+                            );
+                        } 
+                        );
+                    }
+                }
+                );
+            }
+        );
+
+        if(!planesAsociados.contains(sesion.getIdPlan())){
+            throw new NoAutorizadoException();
+        }
+//Fin comprobación seguridad
+
+        if(!repoSesion.existsById(sesion.getId()) || !repoSesion.findById(sesion.getId()).get().getIdPlan().equals(sesion.getIdPlan())){
+            throw new SesionInexistenteException();//Si pide una sesión que existe pero no está asociado al plan del usuario, devolvemos que no existe. El usuario no tiene por qué saber que existe.
         }else{
             return this.repoSesion.save(sesion);
         }
