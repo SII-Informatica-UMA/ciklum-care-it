@@ -21,15 +21,21 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.net.URI;
 import java.sql.Timestamp;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +43,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;      
+import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
 @SpringBootTest(classes = BackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("En el servicio de sesiones")
@@ -57,9 +66,134 @@ class BackendApplicationTests {
     @Autowired
     private SesionService sesionService;
 
+    @Autowired
+    private RestTemplate restTemplateServicios;
+
+    private MockRestServiceServer mockServer;
+
     @BeforeEach
     public void initializeDatabase() {
         sesionRepository.deleteAll();
+        mockServer = MockRestServiceServer.createServer(restTemplateServicios);
+        mockServer.expect( 
+            requestTo(UriComponentsBuilder.fromUriString("http://localhost:8081/centro").build().toUri()))
+            .andExpect(method(HttpMethod.GET))
+            .andRespond(withStatus(HttpStatus.OK)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("[{\"nombre\": \"Centro 1\", \"direccion\": \"Calle Internet\", \"idCentro\": 1}]")
+          );  
+          
+          mockServer.expect( 
+            requestTo(UriComponentsBuilder.fromUriString("http://localhost:8082/cliente?centro=1").build().toUri()))
+            .andExpect(method(HttpMethod.GET))
+            .andRespond(withStatus(HttpStatus.OK)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("["
+                    + "{"
+                    + "\"idUsuario\": 1,"
+                    + "\"telefono\": \"string\","
+                    + "\"direccion\": \"string\","
+                    + "\"dni\": \"string\","
+                    + "\"fechaNacimiento\": \"2024-05-28\","
+                    + "\"sexo\": \"HOMBRE\","
+                    + "\"id\": 1"
+                    + "},"
+                    + "{"
+                    + "\"idUsuario\": 2,"
+                    + "\"telefono\": \"string\","
+                    + "\"direccion\": \"string\","
+                    + "\"dni\": \"string\","
+                    + "\"fechaNacimiento\": \"2024-05-28\","
+                    + "\"sexo\": \"HOMBRE\","
+                    + "\"id\": 2"
+                    + "}"
+                    + "]")
+          );   
+
+          mockServer.expect( 
+            requestTo(UriComponentsBuilder.fromUriString("http://localhost:8084/entrena?cliente=1").build().toUri()))
+            .andExpect(method(HttpMethod.GET))
+            .andRespond(withStatus(HttpStatus.OK)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("["
+                    + "{"
+                    + "\"idEntrenador\": 1,"
+                    + "\"idCliente\": 1,"
+                    + "\"especialidad\": \"piernas\","
+                    + "\"id\": 1,"
+                    + "\"planes\": ["
+                    + "{"
+                    + "\"fechaInicio\": \"2024-05-28\","
+                    + "\"fechaFin\": \"2024-05-28\","
+                    + "\"reglaRecurrencia\": \"string\","
+                    + "\"idRutina\": 1,"
+                    + "\"id\": 1"
+                    + "}"
+                    + "]"
+                    + "}"
+                    + "]")
+          ); 
+
+          mockServer.expect( 
+            requestTo(UriComponentsBuilder.fromUriString("http://localhost:8083/entrenador?centro=1").build().toUri()))
+            .andExpect(method(HttpMethod.GET))
+            .andRespond(withStatus(HttpStatus.OK)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("["
+                    + "{"
+                    + "\"idUsuario\": 1,"
+                    + "\"telefono\": \"string\","
+                    + "\"direccion\": \"string\","
+                    + "\"dni\": \"string\","
+                    + "\"fechaNacimiento\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"fechaAlta\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"fechaBaja\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"especialidad\": \"string\","
+                    + "\"titulacion\": \"string\","
+                    + "\"experiencia\": \"string\","
+                    + "\"observaciones\": \"string\","
+                    + "\"id\": 1"
+                    + "},"
+                    + "{"
+                    + "\"idUsuario\": 2,"
+                    + "\"telefono\": \"string\","
+                    + "\"direccion\": \"string\","
+                    + "\"dni\": \"string\","
+                    + "\"fechaNacimiento\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"fechaAlta\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"fechaBaja\": \"2024-05-28T21:51:14.178Z\","
+                    + "\"especialidad\": \"string\","
+                    + "\"titulacion\": \"string\","
+                    + "\"experiencia\": \"string\","
+                    + "\"observaciones\": \"string\","
+                    + "\"id\": 2"
+                    + "}"
+                    + "]")
+          ); 
+
+          mockServer.expect( 
+            requestTo(UriComponentsBuilder.fromUriString("http://localhost:8084/entrena?entrenador=1").build().toUri()))
+            .andExpect(method(HttpMethod.GET))
+            .andRespond(withStatus(HttpStatus.OK)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("["
+                    + "{"
+                    + "\"idEntrenador\": 1,"
+                    + "\"idCliente\": 1,"
+                    + "\"especialidad\": \"piernas\","
+                    + "\"id\": 1,"
+                    + "\"planes\": ["
+                    + "{"
+                    + "\"fechaInicio\": \"2024-05-28\","
+                    + "\"fechaFin\": \"2024-05-28\","
+                    + "\"reglaRecurrencia\": \"string\","
+                    + "\"idRutina\": 1,"
+                    + "\"id\": 1"
+                    + "}"
+                    + "]"
+                    + "}"
+                    + "]")
+          );
     }
 
     private URI uri(String scheme, String host, int port, String... paths) {
@@ -247,7 +381,26 @@ class BackendApplicationTests {
 
         @Test
 		@DisplayName("devuelve error al editar una sesión inexistente")
-		public void actualizaAlumno() {
+		public void actualizaSesion() {
+			
+			// Preparamos la sesión a actualizar
+			var alum = SesionDTO.builder()
+									.inicio(Timestamp.valueOf("2024-03-30 08:00:00"))
+                                    .idPlan(1L)
+									.build();
+			// Preparamos la petición con la sesión dentro
+			var peticion = put("http", "localhost",port, "/sesion/1", alum);
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+		}
+
+        @Test
+		@DisplayName("devuelve error al editar una sesión con idplan nulo")
+		public void actualizaSesionSinIdPlan() {
 			
 			// Preparamos la sesión a actualizar
 			var alum = SesionDTO.builder()
@@ -260,7 +413,26 @@ class BackendApplicationTests {
 			var respuesta = restTemplate.exchange(peticion,Void.class);
 			
 			// Comprobamos el resultado
-			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
+		}
+
+        @Test
+		@DisplayName("devuelve error al editar una sesión con un idplan al que no se tiene permiso")
+		public void actualizaSesionIdPlanNoAutorizado() {
+			
+			// Preparamos la sesión a actualizar
+			var alum = SesionDTO.builder()
+									.inicio(Timestamp.valueOf("2024-03-30 08:00:00"))
+                                    .idPlan(2L)
+									.build();
+			// Preparamos la petición con la sesión dentro
+			var peticion = put("http", "localhost",port, "/sesion/1", alum);
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
 		}
 
 	}
@@ -331,6 +503,7 @@ class BackendApplicationTests {
 			var sesion = SesionDTO.builder()
 									.descripcion("Pecho")
                                     .inicio(Timestamp.valueOf("2024-03-31 08:00:00"))
+                                    .idPlan(1L)
 									.build();
 			//Buscamos la sesión en la bbdd para obtener el id y preparamos la petición
 			Sesion sesionExist = sesionRepository.findByInicio(Timestamp.valueOf("2024-03-30 08:00:00")).get(0);
@@ -344,6 +517,32 @@ class BackendApplicationTests {
 			var listaSesiones = sesionRepository.findByInicio(Timestamp.valueOf("2024-03-31 08:00:00"));
 			assertThat(listaSesiones).hasSize(1);
             assertThat(listaSesiones.get(0).getInicio()).isEqualTo(Timestamp.valueOf("2024-03-31 08:00:00"));
+		}
+
+        @Test
+		@DisplayName("edita una sesión existente con idPlan incorrecto")
+		public void actualizaAlumnoidPlanIncorrecto() {
+            var sesion3 = new Sesion();
+			sesion3.setDescripcion("Hombros");
+            sesion3.setIdPlan((long) 2);
+            sesion3.setInicio(Timestamp.valueOf("2024-02-30 08:00:00"));
+            sesionRepository.save(sesion3);
+
+			// Preparamos la sesión a actualizar
+			var sesion = SesionDTO.builder()
+									.descripcion("Hombros")
+                                    .inicio(Timestamp.valueOf("2024-02-30 08:00:00"))
+                                    .idPlan(1L)
+									.build();
+			//Buscamos la sesión en la bbdd para obtener el id y preparamos la petición
+			Sesion sesionExist = sesionRepository.findByInicio(Timestamp.valueOf("2024-02-30 08:00:00")).get(0);
+			var peticion = put("http", "localhost",port, "/sesion/"+sesionExist.getId(),sesion);
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
 		}
 
 	}

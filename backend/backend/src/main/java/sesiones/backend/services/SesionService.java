@@ -35,7 +35,7 @@ public class SesionService {
     private final Logger log =Logger.getLogger(SesionService.class.getName());
     private final JwtUtil jwtUtil;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     private final int puertoCentro=8081;
     private final int puertoCliente=8082;
@@ -43,9 +43,10 @@ public class SesionService {
     private final int puertoEntrena=8084;
 
     @Autowired
-    public SesionService(SesionRepository repo, JwtUtil jwtUtil) {
+    public SesionService(SesionRepository repo, JwtUtil jwtUtil, RestTemplate restTemplate) {
         this.repoSesion=repo;
         this.jwtUtil = jwtUtil;
+        this.restTemplate = restTemplate;
     }
 
     private URI uri(String scheme, String host, int port, String... paths) {
