@@ -457,6 +457,12 @@ class BackendApplicationTests {
 
 			sesionRepository.save(sesion1);
 			sesionRepository.save(sesion2);
+
+            var sesion3= new Sesion();
+			sesion1.setDescripcion("hombros");
+            sesion1.setIdPlan((long) 2);
+
+            sesionRepository.save(sesion3);
 		}
 
 		@Test
@@ -494,6 +500,14 @@ class BackendApplicationTests {
                 });
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+
+            var peticionComprobacion = get("http", "localhost", port, "/sesion/1");
+
+            var respuestaComprobacion = restTemplate.exchange(peticionComprobacion,
+                new ParameterizedTypeReference<SesionDTO>() {
+                });
+
+            assertThat(respuestaComprobacion.getStatusCode().value()).isEqualTo(404);
         }
 
         @Test
@@ -544,6 +558,20 @@ class BackendApplicationTests {
 			
 			// Comprobamos el resultado
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+		}
+
+        @Test
+		@DisplayName("devuelve error al eliminar una sesión en la que no se tiene permiso al plan")
+		public void eliminaSesionNoAutorizada() {
+			
+			// Preparamos la petición con la sesión dentro
+			var peticion = delete("http", "localhost",port, "/sesion/3");
+			
+			// Invocamos al servicio REST 
+			var respuesta = restTemplate.exchange(peticion,Void.class);
+			
+			// Comprobamos el resultado
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
 		}
 
 	}
