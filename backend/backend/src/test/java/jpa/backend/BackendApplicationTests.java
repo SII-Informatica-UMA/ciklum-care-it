@@ -476,8 +476,8 @@ class BackendApplicationTests {
 		}
 
         @Test
-		@DisplayName("devuelve error al obtener sesiones en la que no se tiene permiso al plan")
-		public void errorPlanDistinto() {
+		@DisplayName("devuelve error al obtener lista de sesiones en la que no se tiene permiso al plan")
+		public void errorListaSesionesPlanDistinto() {
             var peticion = get("http","localhost",port,"/sesion",2L);
 
 			var respuesta = restTemplate.exchange(peticion,
@@ -496,6 +496,17 @@ class BackendApplicationTests {
 
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getDescripcion()).isEqualTo("Pecho");
+		}
+
+        @Test
+		@DisplayName("devuelve error al obtener una sesion concreta en la que no se tiene permiso al plan")
+		public void errorSesionPlanDistinto() {
+            var peticion = get("http","localhost",port,"/sesion/3");
+
+			var respuesta = restTemplate.exchange(peticion,
+					new ParameterizedTypeReference<SesionDTO>() {});
+
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
 		}
 
 
