@@ -228,7 +228,7 @@ class BackendApplicationTests {
         headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
 
         String urlTemplate = UriComponentsBuilder.fromHttpUrl(uri.toString())
-                .queryParam("idPlan", idPlan)
+                .queryParam("plan", idPlan)
                 .encode()
                 .toUriString();
 
@@ -271,7 +271,7 @@ class BackendApplicationTests {
         headers.setBearerAuth(token); // Añadir token de autenticación como Bearer
 
         String urlTemplate = UriComponentsBuilder.fromHttpUrl(uriAux.toString())
-                .queryParam("idPlan", idPlan)
+                .queryParam("plan", idPlan)
                 .encode()
                 .toUriString();
 
