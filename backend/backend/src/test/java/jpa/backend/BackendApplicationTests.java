@@ -476,6 +476,17 @@ class BackendApplicationTests {
 		}
 
         @Test
+		@DisplayName("devuelve error al obtener sesiones en la que no se tiene permiso al plan")
+		public void errorPlanDistinto() {
+            var peticion = get("http","localhost",port,"/sesion",2L);
+
+			var respuesta = restTemplate.exchange(peticion,
+					new ParameterizedTypeReference<List<SesionDTO>>() {});
+
+			assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
+		}
+
+        @Test
 		@DisplayName("obtiene una sesion concreta")
 		public void obtenerSesionConcreta() {
 			var peticion = get("http", "localhost",port, "/sesion/2");
@@ -486,6 +497,7 @@ class BackendApplicationTests {
 			assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
 			assertThat(respuesta.getBody().getDescripcion()).isEqualTo("Pecho");
 		}
+
 
         @Test
         @DisplayName("Borra correctamente una sesion")
