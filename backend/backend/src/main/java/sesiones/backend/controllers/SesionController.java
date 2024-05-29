@@ -27,14 +27,14 @@ public class SesionController {
     }
 
     @GetMapping()
-	public ResponseEntity<List<SesionDTO>> listaDeSesiones(@RequestParam(value="idPlan") Long planId) {
+	public ResponseEntity<List<SesionDTO>> listaDeSesiones(@RequestParam(value="plan") Long planId) {
 		return ResponseEntity.ok(servicioSesion.getSesiones(planId).stream()
 			.map(Mapper::toSesionDTO)
 			.toList());
 	}
 
     @PostMapping()
-    public ResponseEntity<SesionDTO> aniadirSesion(@RequestBody SesionNuevaDTO sesion, @RequestParam(value="idPlan") Long planId, UriComponentsBuilder builder) {
+    public ResponseEntity<SesionDTO> aniadirSesion(@RequestBody SesionNuevaDTO sesion, @RequestParam(value="plan") Long planId, UriComponentsBuilder builder) {
        
             Sesion sesionAux = Mapper.toSesion(sesion);
             sesionAux.setIdPlan(planId);
