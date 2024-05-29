@@ -77,8 +77,10 @@ public class SesionController {
         try{
             servicioSesion.deleteSesion(id);
             return ResponseEntity.ok().build();
-        }catch(SesionInexistenteException ne){
+        } catch(SesionInexistenteException ne){
             return ResponseEntity.status(404).build();
+        } catch(NoAutorizadoException e){
+            return ResponseEntity.status(403).build();
         }
         
     }

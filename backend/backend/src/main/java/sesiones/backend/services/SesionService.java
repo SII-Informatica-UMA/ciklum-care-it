@@ -127,9 +127,10 @@ public class SesionService {
     }
 
     public void deleteSesion(Long id){
-        var sesion = repoSesion.findById(id);
+        Optional<Sesion> sesion = repoSesion.findById(id);
 
         if(sesion.isPresent()){
+            this.comprobarSeguridad(sesion.get());
             repoSesion.deleteById(id);
         }else{
             throw new SesionInexistenteException();
