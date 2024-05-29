@@ -1,16 +1,13 @@
 package sesiones.backend.controllers;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
 import sesiones.backend.exceptions.NoAutorizadoException;
 import sesiones.backend.exceptions.SesionInexistenteException;
-import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.services.SesionService;
 
 import java.net.URI;
@@ -56,7 +53,9 @@ public class SesionController {
 			return ResponseEntity.of(sesion.map(Mapper::toSesionDTO));
 		} catch(SesionInexistenteException e){
 			return ResponseEntity.status(404).build();
-		}
+		} catch(NoAutorizadoException e){
+            return ResponseEntity.status(403).build();
+        }
 	}
 
     @PutMapping("/{id}")

@@ -24,7 +24,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import sesiones.backend.entities.Sesion;
 import sesiones.backend.exceptions.NoAutorizadoException;
 import sesiones.backend.exceptions.SesionInexistenteException;
-import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.repositories.SesionRepository;
 import sesiones.backend.security.JwtUtil;
 import sesiones.backend.security.SecurityConfguration;
@@ -93,22 +92,20 @@ public class SesionService {
 
 
     public List<Sesion> getSesiones(Long idPlan){
-        Sesion s = new Sesion();
-        s.setIdPlan(idPlan);
-        this.comprobarSeguridad(s);
+        this.comprobarSeguridad(idPlan);
 
         return repoSesion.findByIdPlan(idPlan);
     }
 
     public Sesion aniadirSesion(Sesion sesion) {
-        comprobarSeguridad(sesion);
+        comprobarSeguridad(sesion.getIdPlan());
         return this.repoSesion.save(sesion);
     }
 
     public Optional<Sesion> obtenerSesion(Long id) {
 		Optional<Sesion> s = repoSesion.findById(id);
 		if (s.isPresent()){
-            this.comprobarSeguridad(s.get());
+            this.comprobarSeguridad(s.get().getIdPlan());
 
             return s;
 		} else {
@@ -117,7 +114,7 @@ public class SesionService {
 	}
 
     public Sesion editarSesion(Sesion sesion) {
-        comprobarSeguridad(sesion);
+        comprobarSeguridad(sesion.getIdPlan());
 
         if(!repoSesion.existsById(sesion.getId()) || !repoSesion.findById(sesion.getId()).get().getIdPlan().equals(sesion.getIdPlan())){
             throw new SesionInexistenteException();//Si pide una sesión que existe pero no está asociado al plan del usuario, devolvemos que no existe. El usuario no tiene por qué saber que existe.
@@ -130,7 +127,7 @@ public class SesionService {
         Optional<Sesion> sesion = repoSesion.findById(id);
 
         if(sesion.isPresent()){
-            this.comprobarSeguridad(sesion.get());
+            this.comprobarSeguridad(sesion.get().getIdPlan());
             repoSesion.deleteById(id);
         }else{
             throw new SesionInexistenteException();
@@ -139,9 +136,9 @@ public class SesionService {
 
 
 
-    private void comprobarSeguridad(Sesion sesion){
+    private void comprobarSeguridad(Long idPlan){
         //Inicio comprobación seguridad
-        if(sesion.getIdPlan()==null){
+        if(idPlan==null){
             throw new NoAutorizadoException();
         }
 
@@ -203,7 +200,7 @@ public class SesionService {
             }
         );
 
-        if(!planesAsociados.contains(sesion.getIdPlan())){
+        if(!planesAsociados.contains(idPlan)){
             throw new NoAutorizadoException();
         }
 

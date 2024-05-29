@@ -6,7 +6,6 @@ import sesiones.backend.dtos.SesionDTO;
 import sesiones.backend.dtos.SesionNuevaDTO;
 import sesiones.backend.entities.Sesion;
 import sesiones.backend.exceptions.NoAutorizadoException;
-import sesiones.backend.exceptions.SesionNoAsociadaException;
 import sesiones.backend.repositories.SesionRepository;
 import sesiones.backend.services.SesionService;
 
@@ -29,7 +28,6 @@ import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.sql.Timestamp;
@@ -459,8 +457,8 @@ class BackendApplicationTests {
 			sesionRepository.save(sesion2);
 
             var sesion3= new Sesion();
-			sesion1.setDescripcion("hombros");
-            sesion1.setIdPlan((long) 2);
+			sesion3.setDescripcion("hombros");
+            sesion3.setIdPlan((long) 2);
 
             sesionRepository.save(sesion3);
 		}
