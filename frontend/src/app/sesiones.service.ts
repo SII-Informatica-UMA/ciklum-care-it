@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Sesion } from './sesion';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 
 
@@ -10,6 +10,7 @@ import {Observable, Subject} from 'rxjs';
 export class SesionesService {
 
   private clienteId = 1;
+  
 
   private sesionesEjemplo: Sesion [] = [
     {idPlan: 2, inicio: '3000-10-29T08:00:00', fin: '2024-10-29T09:00:00', 
@@ -29,32 +30,40 @@ export class SesionesService {
 	descripcion: 'Descripción5. La verdad es que no me ha gustado nada este entrenamiento. Me gustaria que dejasen de poner ese tipo de cosas porque me acaba doliendo la espalda.', presencial: true, datosSalud: [], id: 5},
   ];
 
-  constructor(private http: HttpClient) {/*
-
-    for(let i=0; i<this.sesionesEjemplo.length; i++){
+  constructor(private http: HttpClient) {
+    /*for(let i=0; i<this.sesionesEjemplo.length; i++){
       this.http.post('http://localhost:8080/sesion?plan=' + this.sesionesEjemplo[i].idPlan, this.sesionesEjemplo[i])
         .subscribe(c => {
       });
    }*/
+  }
 
-   }
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE2MDMzNTQ4LCJleHAiOjE3MTg2MjU1NDh9.0EMk13GFbgr5vN2Si-pJrPQemHxzfbpq0kFJYExgsSY-K6p-J-LzeEjWhSFkw4WhIoWuKZKSQkupY-Y7FKaxjg`
+    });
+  }
 
   getSesiones(idPlan: number): Observable<Sesion[]> {
-     return this.http.get<Sesion[]>('http://localhost:8080/sesion?plan=' + idPlan);
+    const headers = this.getHeaders();
+    return this.http.get<Sesion[]>('http://localhost:8080/sesion?plan=' + idPlan, { headers });
   }
 
   addSesion(sesion: Sesion, plan_id: number): Observable<Sesion> {
-    return this.http.post<Sesion>('http://localhost:8080/sesion?plan=' + plan_id, sesion);
+    const headers = this.getHeaders();
+    return this.http.post<Sesion>('http://localhost:8080/sesion?plan=' + plan_id, sesion, { headers });
   }
 
   editarSesion(sesion: Sesion): Observable<Sesion> {
-    /*let indice = this.sesiones.findIndex(c => c.id == sesion.id);
+     /*let indice = this.sesiones.findIndex(c => c.id == sesion.id);
     this.sesiones[indice] = sesion;*/
-    return this.http.put<Sesion>('http://localhost:8080/sesion/' + sesion.id, sesion);
+    const headers = this.getHeaders();
+    return this.http.put<Sesion>('http://localhost:8080/sesion/' + sesion.id, sesion, { headers });
   }
 
   eliminarSesion(id: number): Observable<HttpResponse<string>> {
-    return this.http.delete('http://localhost:8080/sesion/' + id, {observe: "response", responseType: 'text'});
+    const headers = this.getHeaders();
+    return this.http.delete('http://localhost:8080/sesion/' + id, { headers, observe: 'response', responseType: 'text' });
   }
 
   ordenarSesiones(sesiones: Sesion[]){

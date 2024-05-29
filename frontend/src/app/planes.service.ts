@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Plan } from './plan';
 import { Subject,Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,8 @@ export class PlanesService {
 
   planCambiado$ = this.planCambiadoSource.asObservable();
 
-  constructor(private http: HttpClient) {/*
+  constructor(private http: HttpClient) {
+    /*
   this.http.post('http://localhost:8080/centro',{nombre: 'Centro de entrenamiento',
   direccion: 'direccion'
   })
@@ -90,14 +91,19 @@ export class PlanesService {
 
   for(let i=0; i<this.planesEjemplo.length; i++){
        this.http.post('http://localhost:8080/plan?entrena=1',this.planesEjemplo[i])
-      .subscribe(c => {
-
-    });
+      .subscribe(c => { });
   }*/
-}
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE2MDMzNTQ4LCJleHAiOjE3MTg2MjU1NDh9.0EMk13GFbgr5vN2Si-pJrPQemHxzfbpq0kFJYExgsSY-K6p-J-LzeEjWhSFkw4WhIoWuKZKSQkupY-Y7FKaxjg`
+    });
+  }
 
   getPlanes(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/entrena?cliente=' + this.clienteId);
+    const headers = this.getHeaders();
+    return this.http.get<any[]>('http://localhost:8084/entrena?cliente=' + this.clienteId, { headers });
   }
 
   planCambiado() {
