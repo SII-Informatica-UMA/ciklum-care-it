@@ -93,6 +93,10 @@ public class SesionService {
 
 
     public List<Sesion> getSesiones(Long idPlan){
+        Sesion s = new Sesion();
+        s.setIdPlan(idPlan);
+        this.comprobarSeguridad(s);
+
         return repoSesion.findByIdPlan(idPlan);
     }
 
@@ -102,46 +106,11 @@ public class SesionService {
     }
 
     public Optional<Sesion> obtenerSesion(Long id) {
-        Optional<UserDetails> user = SecurityConfguration.getAuthenticatedUser();
-        user.ifPresent(u -> log.info("Usuario autenticado: " + u.getUsername()));
-        String token = jwtUtil.generateToken(user.get());
-        user.ifPresent(u -> log.info("token: "+token));
-
-        //microservicio centrogerente ejecutado en el puerto 8081 con --server.port=8081
-        var peticionCentros = get("http","localhost",8081,"/centro",token);
-
-        var respuestaCentros = restTemplate.exchange(peticionCentros,
-        new ParameterizedTypeReference<List<Map<String, Object>>>() {
-        });
-
-        log.info("Respuesta: " + respuestaCentros.getStatusCode());
-        if(respuestaCentros.getStatusCode().value()==200){
-            for(Map<String,Object> centro : respuestaCentros.getBody()){
-                log.info("Centro " + centro.get("idCentro").toString());
-
-                Long idCentro =  Long.parseLong(centro.get("idCentro").toString());
-
-                //ahora vemos los clientes y entrenamientos de cada uno de los centros
-
-                //microservicio clientes en 8082 con --server.port=8082
-                var peticionClientes = get("http","localhost",8082,"/cliente",token, "centro", idCentro);
-
-                 var respuestaClientes = restTemplate.exchange(peticionClientes,
-                new ParameterizedTypeReference<List<Map<String, Object>>>() {
-                });
-
-                log.info("Respuesta: " + respuestaClientes.getStatusCode());
-
-                for(Map<String, Object> cliente: respuestaClientes.getBody()){
-                    log.info("Cliente " + cliente.get("idUsuario").toString());
-                }
-            }
-        }
-        
-
 		Optional<Sesion> s = repoSesion.findById(id);
 		if (s.isPresent()){
-			return s;
+            this.comprobarSeguridad(s.get());
+
+            return s;
 		} else {
 			throw new SesionInexistenteException();
 		}
