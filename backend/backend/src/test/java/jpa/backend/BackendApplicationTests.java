@@ -380,7 +380,7 @@ class BackendApplicationTests {
 
         @Test
 		@DisplayName("devuelve error al editar una sesión inexistente")
-		public void actualizaSesion() {
+		public void errorActualizaSesionInexistente() {
 			
 			// Preparamos la sesión a actualizar
 			var alum = SesionDTO.builder()
@@ -533,7 +533,7 @@ class BackendApplicationTests {
 
         @Test
 		@DisplayName("edita una sesión existente")
-		public void actualizaAlumno() {
+		public void actualizaSesion() {
 
 			// Preparamos la sesión a actualizar
 			var sesion = SesionDTO.builder()
@@ -557,7 +557,7 @@ class BackendApplicationTests {
 
         @Test
 		@DisplayName("edita una sesión existente con idPlan incorrecto")
-		public void actualizaAlumnoidPlanIncorrecto() {
+		public void actualizaSesionidPlanIncorrecto() {
             var sesion3 = new Sesion();
 			sesion3.setDescripcion("Hombros");
             sesion3.setIdPlan((long) 2);
